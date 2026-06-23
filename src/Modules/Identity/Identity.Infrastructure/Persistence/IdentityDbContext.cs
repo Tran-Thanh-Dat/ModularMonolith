@@ -1,6 +1,7 @@
 using BuildingBlocks.Application.Abstractions;
 using BuildingBlocks.Infrastructure.Persistence;
 using Identity.Domain.Constants;
+using Identity.Domain.PasswordResetTokens;
 using Identity.Domain.Permissions;
 using Identity.Domain.RefreshTokens;
 using Identity.Domain.Roles;
@@ -27,6 +28,8 @@ public sealed class IdentityDbContext : AuditableDbContext
     public DbSet<Permission> Permissions => Set<Permission>();
 
     public DbSet<UserRefreshToken> UserRefreshTokens => Set<UserRefreshToken>();
+
+    public DbSet<PasswordResetToken> PasswordResetTokens => Set<PasswordResetToken>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

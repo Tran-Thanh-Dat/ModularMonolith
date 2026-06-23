@@ -5,6 +5,7 @@ using Identity.Infrastructure.Authentication;
 using Identity.Infrastructure.Persistence;
 using Identity.Infrastructure.Security;
 using Identity.Infrastructure.Seeding;
+using Identity.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
@@ -24,6 +25,7 @@ public static class DependencyInjection
         services.Configure<JwtOptions>(configuration.GetSection(JwtOptions.SectionName));
         services.Configure<RefreshTokenOptions>(configuration.GetSection(RefreshTokenOptions.SectionName));
         services.Configure<AdminSeedOptions>(configuration.GetSection(AdminSeedOptions.SectionName));
+        services.Configure<PasswordResetOptions>(configuration.GetSection(PasswordResetOptions.SectionName));
 
         ValidateJwtOptions(configuration);
         ValidateRefreshTokenOptions(configuration);
@@ -36,6 +38,7 @@ public static class DependencyInjection
 
         services.AddScoped<IIdentityUserRepository, IdentityUserRepository>();
         services.AddScoped<IIdentityRefreshTokenRepository, IdentityRefreshTokenRepository>();
+        services.AddScoped<IPasswordResetTokenRepository, PasswordResetTokenRepository>();
 
         // Register concrete UoW for typed injection in Identity/User services.
         // Also register as IUnitOfWork so TransactionBehavior receives it via IEnumerable<IUnitOfWork>.
@@ -45,8 +48,11 @@ public static class DependencyInjection
         services.AddScoped<IJwtTokenService, JwtTokenService>();
         services.AddSingleton<IRefreshTokenSettings>(provider =>
             provider.GetRequiredService<Microsoft.Extensions.Options.IOptions<RefreshTokenOptions>>().Value);
+        services.AddSingleton<IPasswordResetSettings>(provider =>
+            provider.GetRequiredService<Microsoft.Extensions.Options.IOptions<PasswordResetOptions>>().Value);
         services.AddSingleton<IRefreshTokenService, RefreshTokenService>();
         services.AddSingleton<IPasswordHasher, PasswordHasher>();
+        services.AddScoped<IAccountEmailService, AccountEmailService>();
         services.AddScoped<IIdentitySeeder, IdentitySeeder>();
 
         return services;

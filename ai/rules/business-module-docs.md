@@ -17,7 +17,7 @@ Template: [../prompts/new-module-task.md](../prompts/new-module-task.md) · Revi
 **Definition of Done:**
 
 - `dotnet build` + `dotnet test` pass
-- Permissions + ErrorCodes + validators + tests + docs cập nhật
+- Permissions + ErrorCodes + validators + tests + **docs cập nhật (luôn đồng bộ code — xem [feature-documentation.md](./feature-documentation.md))**
 - Không secret thật, không phá production hardening
 - Feature chưa làm → **Future/Backlog**, không document như đã xong
 

@@ -5,27 +5,35 @@ using Identity.Application.Abstractions;
 using Identity.Domain.Users;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Settings.Application.Abstractions;
 
 namespace Identity.Infrastructure.Authentication;
 
 public sealed class JwtTokenService : IJwtTokenService
 {
     private readonly JwtOptions _options;
+    private readonly IAccessPolicyService _accessPolicyService;
 
-    public JwtTokenService(IOptions<JwtOptions> options)
+    public JwtTokenService(
+        IOptions<JwtOptions> options,
+        IAccessPolicyService accessPolicyService)
     {
         _options = options.Value;
+        _accessPolicyService = accessPolicyService;
     }
 
-    public Task<JwtTokenResult> GenerateAccessTokenAsync(
+    public async Task<JwtTokenResult> GenerateAccessTokenAsync(
         User user,
         IReadOnlyCollection<string> roles,
         IReadOnlyCollection<string> permissions,
         CancellationToken cancellationToken = default)
     {
-        _ = cancellationToken;
+        var sessionPolicy = await _accessPolicyService.GetSessionPolicyAsync(cancellationToken);
+        var expirationMinutes = sessionPolicy.AccessTokenExpirationMinutes > 0
+            ? sessionPolicy.AccessTokenExpirationMinutes
+            : _options.AccessTokenExpirationMinutes;
 
-        var expiresAt = DateTimeOffset.UtcNow.AddMinutes(_options.AccessTokenExpirationMinutes);
+        var expiresAt = DateTimeOffset.UtcNow.AddMinutes(expirationMinutes);
         var claims = new List<Claim>
         {
             new(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
@@ -53,10 +61,10 @@ public sealed class JwtTokenService : IJwtTokenService
 
         var accessToken = new JwtSecurityTokenHandler().WriteToken(token);
 
-        return Task.FromResult(new JwtTokenResult
+        return new JwtTokenResult
         {
             AccessToken = accessToken,
             ExpiresAt = expiresAt
-        });
+        };
     }
 }

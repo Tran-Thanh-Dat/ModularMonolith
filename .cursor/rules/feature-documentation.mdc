@@ -1,0 +1,10 @@
+---
+description: Mọi tính năng mới phải cập nhật documentation — luôn giữ docs đồng bộ với code
+alwaysApply: true
+---
+
+# Feature Documentation
+
+**Read and follow:** [ai/rules/feature-documentation.md](../../ai/rules/feature-documentation.md)
+
+Nội dung rule nằm trong `ai/rules/` — không duplicate ở đây. Giải thích `.cursor` vs `ai`: [ai/CURSOR.md](../../ai/CURSOR.md).

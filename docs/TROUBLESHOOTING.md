@@ -22,7 +22,26 @@ Common development and deployment issues.
 1. DB user has CREATE/ALTER rights
 2. No conflicting manual schema changes
 3. Run migration per module DbContext with correct `--context`
-4. Check `__ef_migrations_history` in each schema
+4. Check `__ef_migrations_history` in each schema (`identity`, `settings`, `categories`, …)
+
+Settings module:
+
+```bash
+dotnet ef database update --project src/Modules/Settings/Settings.Infrastructure --startup-project src/ApiHost --context SettingsDbContext
+```
+
+## Maintenance mode (503)
+
+**Symptoms:** API returns 503 for most routes; health endpoints still respond.
+
+**Checks:**
+
+1. Review maintenance policy via `GET /api/v1/access-policy/maintenance`
+2. Confirm `Enabled`, optional `StartAt` / `EndAt` window
+3. Authenticated Admin/SuperAdmin may bypass when `AllowAdminBypass=true`
+4. Disable maintenance via policy API or set `Maintenance.Enabled` to false
+
+See [ACCESS_POLICY.md](./ACCESS_POLICY.md).
 
 ## Redis unavailable
 

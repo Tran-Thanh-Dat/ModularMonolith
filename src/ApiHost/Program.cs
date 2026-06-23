@@ -4,6 +4,8 @@ using AuditLogs.Infrastructure;
 
 using ApiHost.Extensions;
 
+using ApiHost.Middlewares;
+
 using ApiHost.Startup;
 
 using BackgroundJobs.Api;
@@ -33,6 +35,10 @@ using Monitoring.Infrastructure;
 using Notifications.Api;
 
 using Notifications.Infrastructure;
+
+using Settings.Api;
+
+using Settings.Infrastructure;
 
 using Microsoft.Extensions.Hosting;
 
@@ -115,6 +121,10 @@ try
 
     builder.Services.AddCategoriesApi();
 
+    builder.Services.AddSettingsInfrastructure(builder.Configuration);
+
+    builder.Services.AddSettingsApi();
+
     builder.Services.AddFilesInfrastructure(builder.Configuration);
 
     builder.Services.AddFilesApi();
@@ -144,6 +154,8 @@ try
         .AddUsersPresentation()
 
         .AddCategoriesPresentation()
+
+        .AddSettingsPresentation()
 
         .AddFilesPresentation()
 
@@ -210,6 +222,8 @@ try
 
 
     app.UseAuthentication();
+
+    app.UseMiddleware<MaintenanceModeMiddleware>();
 
     app.UseAuthorization();
 

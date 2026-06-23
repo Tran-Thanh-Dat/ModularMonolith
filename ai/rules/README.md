@@ -5,6 +5,7 @@
 | File | Cursor wiring | Khi nào áp dụng |
 |------|---------------|-----------------|
 | [business-module-docs.md](./business-module-docs.md) | `business-module-docs.mdc` | Luôn (`alwaysApply`) |
+| [feature-documentation.md](./feature-documentation.md) | `feature-documentation.mdc` | Luôn (`alwaysApply`) — mọi tính năng/thay đổi API phải cập nhật docs |
 | [module-structure.md](./module-structure.md) | `module-structure.mdc` | `src/Modules/**` |
 | [module-unitofwork.md](./module-unitofwork.md) | `module-unitofwork.mdc` | Application/Infrastructure |
 | [module-api-layer.md](./module-api-layer.md) | `module-api-layer.mdc` | `*.Api/**` |

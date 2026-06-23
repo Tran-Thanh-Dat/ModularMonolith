@@ -1,7 +1,9 @@
 using BuildingBlocks.Application.CQRS;
 using BuildingBlocks.Application.Results;
 using FluentValidation;
+using Identity.Application.Validation;
 using MediatR;
+using Settings.Application.Abstractions;
 using Users.Application.Abstractions;
 
 namespace Users.Application.Users.CreateUser;
@@ -15,7 +17,7 @@ public sealed record CreateUserCommand(
 
 public sealed class CreateUserCommandValidator : AbstractValidator<CreateUserCommand>
 {
-    public CreateUserCommandValidator()
+    public CreateUserCommandValidator(IPasswordPolicyValidator passwordPolicyValidator)
     {
         RuleFor(command => command.UserName)
             .NotEmpty()
@@ -31,12 +33,7 @@ public sealed class CreateUserCommandValidator : AbstractValidator<CreateUserCom
             .MaximumLength(255);
 
         RuleFor(command => command.Password)
-            .NotEmpty()
-            .MinimumLength(8)
-            .Matches("[A-Z]").WithMessage("Password must contain at least one uppercase letter.")
-            .Matches("[a-z]").WithMessage("Password must contain at least one lowercase letter.")
-            .Matches("[0-9]").WithMessage("Password must contain at least one digit.")
-            .Matches("[^a-zA-Z0-9]").WithMessage("Password must contain at least one special character.");
+            .ApplyPasswordPolicy(passwordPolicyValidator);
 
         RuleFor(command => command.RoleIds)
             .NotNull();

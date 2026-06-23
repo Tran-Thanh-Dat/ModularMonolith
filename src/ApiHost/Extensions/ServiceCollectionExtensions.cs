@@ -3,11 +3,13 @@ using BuildingBlocks.Application;
 using BuildingBlocks.Infrastructure;
 using BuildingBlocks.Web;
 using BackgroundJobs.Application;
+using ApiHost.Middlewares;
 using Categories.Application;
 using Files.Application;
 using Identity.Application;
 using Monitoring.Application;
 using Notifications.Application;
+using Settings.Application;
 using Users.Application;
 
 namespace ApiHost.Extensions;
@@ -23,6 +25,7 @@ public static class ServiceCollectionExtensions
             typeof(Users.Application.DependencyInjection).Assembly,
             typeof(AuditLogs.Application.DependencyInjection).Assembly,
             typeof(Categories.Application.DependencyInjection).Assembly,
+            typeof(Settings.Application.DependencyInjection).Assembly,
             typeof(Files.Application.DependencyInjection).Assembly,
             typeof(Notifications.Application.DependencyInjection).Assembly,
             typeof(BackgroundJobs.Application.DependencyInjection).Assembly,

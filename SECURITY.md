@@ -77,6 +77,13 @@ Implementation: `src/ApiHost/Startup/ProductionStartupValidator.cs`.
 
 - Password hashes are never logged or returned in API responses.
 - Failed login messages are generic (no user enumeration where possible).
+- Password complexity is driven by **access policy** settings (`IPasswordPolicyValidator`); JWT/refresh secrets remain in configuration only.
+
+### System settings
+
+- Do **not** store JWT signing keys, SMTP passwords, or API secrets in `settings.system_settings`.
+- Sensitive settings are masked in API responses unless caller has `Setting.ViewSensitive`.
+- Maintenance mode can block public API traffic (503) while allowing health checks and optional admin bypass.
 
 ## CORS policy
 

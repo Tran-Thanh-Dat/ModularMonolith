@@ -9,6 +9,7 @@ using Identity.Domain.Roles;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Settings.Application.Abstractions;
 
 namespace Identity.Application.Auth.Login;
 
@@ -21,6 +22,7 @@ public sealed class LoginCommandHandler : IRequestHandler<LoginCommand, Result<L
     private readonly IRefreshTokenService _refreshTokenService;
     private readonly IDateTimeProvider _dateTimeProvider;
     private readonly IRefreshTokenSettings _refreshTokenSettings;
+    private readonly IAccessPolicyService _accessPolicyService;
     private readonly IActivityLogService _activityLogService;
     private readonly ICacheOperationBuffer _cacheOperationBuffer;
     private readonly CacheOptions _cacheOptions;
@@ -34,6 +36,7 @@ public sealed class LoginCommandHandler : IRequestHandler<LoginCommand, Result<L
         IRefreshTokenService refreshTokenService,
         IDateTimeProvider dateTimeProvider,
         IRefreshTokenSettings refreshTokenSettings,
+        IAccessPolicyService accessPolicyService,
         IActivityLogService activityLogService,
         ICacheOperationBuffer cacheOperationBuffer,
         IOptions<CacheOptions> cacheOptions,
@@ -46,6 +49,7 @@ public sealed class LoginCommandHandler : IRequestHandler<LoginCommand, Result<L
         _refreshTokenService = refreshTokenService;
         _dateTimeProvider = dateTimeProvider;
         _refreshTokenSettings = refreshTokenSettings;
+        _accessPolicyService = accessPolicyService;
         _activityLogService = activityLogService;
         _cacheOperationBuffer = cacheOperationBuffer;
         _cacheOptions = cacheOptions.Value;
@@ -93,9 +97,14 @@ public sealed class LoginCommandHandler : IRequestHandler<LoginCommand, Result<L
             permissions,
             cancellationToken);
 
+        var sessionPolicy = await _accessPolicyService.GetSessionPolicyAsync(cancellationToken);
+        var refreshExpirationDays = sessionPolicy.RefreshTokenExpirationDays > 0
+            ? sessionPolicy.RefreshTokenExpirationDays
+            : _refreshTokenSettings.ExpirationDays;
+
         var rawRefreshToken = _refreshTokenService.GenerateRefreshToken();
         var refreshTokenHash = _refreshTokenService.HashRefreshToken(rawRefreshToken);
-        var refreshExpiresAt = _dateTimeProvider.UtcNow.AddDays(_refreshTokenSettings.ExpirationDays);
+        var refreshExpiresAt = _dateTimeProvider.UtcNow.AddDays(refreshExpirationDays);
 
         var refreshTokenEntity = UserRefreshToken.Create(
             user.Id,

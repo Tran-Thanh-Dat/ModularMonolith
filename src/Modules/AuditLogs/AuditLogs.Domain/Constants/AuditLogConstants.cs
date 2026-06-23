@@ -13,6 +13,7 @@ public static class AuditLogConstants
         public const string Files = "Files";
         public const string Notifications = "Notifications";
         public const string BackgroundJobs = "BackgroundJobs";
+        public const string Settings = "Settings";
     }
 
     public static class Actions
@@ -29,6 +30,7 @@ public static class AuditLogConstants
             "AuditLog",
             "ActivityLog",
             "UserRefreshToken",
+            "PasswordResetToken",
             "RoleUser",
             "PermissionUser"
         };

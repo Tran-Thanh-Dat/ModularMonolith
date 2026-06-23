@@ -6,6 +6,8 @@ using BuildingBlocks.Testing.Fakes;
 using Identity.Application.Abstractions;
 using Identity.Application.Auth.RefreshToken;
 using Identity.Domain.RefreshTokens;
+using Settings.Application.Abstractions;
+using Settings.Application.AccessPolicy;
 using Identity.Domain.Users;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Options;
@@ -126,6 +128,7 @@ public sealed class RefreshTokenCommandHandlerTests
             new FakeRefreshTokenService(),
             new FixedDateTimeProvider(DateTimeOffset.UtcNow),
             new FakeRefreshTokenSettings(),
+            new FakeAccessPolicyService(),
             activityLog ?? new FakeActivityLogService(),
             cacheBuffer ?? new RecordingCacheInvalidationBuffer(),
             Options.Create(new CacheOptions { UserPermissionsExpirationMinutes = 20 }),
@@ -143,6 +146,22 @@ public sealed class RefreshTokenCommandHandlerTests
             Guid userId,
             CancellationToken cancellationToken = default) =>
             Task.FromResult(user);
+
+        public Task<User?> FindActiveByEmailAsync(
+            string normalizedEmail,
+            CancellationToken cancellationToken = default) =>
+            Task.FromResult(user);
+
+        public Task<User?> FindActiveByIdForUpdateAsync(
+            Guid userId,
+            CancellationToken cancellationToken = default) =>
+            Task.FromResult(user);
+
+        public Task<bool> EmailExistsForOtherUserAsync(
+            string normalizedEmail,
+            Guid userId,
+            CancellationToken cancellationToken = default) =>
+            Task.FromResult(false);
     }
 
     private sealed class FakeRefreshTokenRepository : IIdentityRefreshTokenRepository
@@ -196,6 +215,38 @@ public sealed class RefreshTokenCommandHandlerTests
     private sealed class FakeRefreshTokenSettings : IRefreshTokenSettings
     {
         public int ExpirationDays => 7;
+    }
+
+    private sealed class FakeAccessPolicyService : IAccessPolicyService
+    {
+        public Task<PasswordPolicyResponse> GetPasswordPolicyAsync(CancellationToken cancellationToken = default) =>
+            Task.FromResult(new PasswordPolicyResponse());
+
+        public Task UpdatePasswordPolicyAsync(UpdatePasswordPolicyRequest request, CancellationToken cancellationToken = default) =>
+            Task.CompletedTask;
+
+        public Task<LoginPolicyResponse> GetLoginPolicyAsync(CancellationToken cancellationToken = default) =>
+            Task.FromResult(new LoginPolicyResponse());
+
+        public Task UpdateLoginPolicyAsync(UpdateLoginPolicyRequest request, CancellationToken cancellationToken = default) =>
+            Task.CompletedTask;
+
+        public Task<SessionPolicyResponse> GetSessionPolicyAsync(CancellationToken cancellationToken = default) =>
+            Task.FromResult(new SessionPolicyResponse
+            {
+                AccessTokenExpirationMinutes = 30,
+                RefreshTokenExpirationDays = 7,
+                RefreshTokenReuseDetectionEnabled = true
+            });
+
+        public Task UpdateSessionPolicyAsync(UpdateSessionPolicyRequest request, CancellationToken cancellationToken = default) =>
+            Task.CompletedTask;
+
+        public Task<MaintenancePolicyResponse> GetMaintenancePolicyAsync(CancellationToken cancellationToken = default) =>
+            Task.FromResult(new MaintenancePolicyResponse());
+
+        public Task UpdateMaintenancePolicyAsync(UpdateMaintenancePolicyRequest request, CancellationToken cancellationToken = default) =>
+            Task.CompletedTask;
     }
 
     private sealed class TrackingJwtTokenService : IJwtTokenService

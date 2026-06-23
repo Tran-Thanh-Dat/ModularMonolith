@@ -37,4 +37,32 @@ public sealed class IdentityUserRepository : IIdentityUserRepository
             .FirstOrDefaultAsync(
                 u => u.Id == userId && !u.IsDeleted && u.IsActive,
                 cancellationToken);
+
+    public Task<User?> FindActiveByEmailAsync(
+        string normalizedEmail,
+        CancellationToken cancellationToken = default) =>
+        _unitOfWork.Repository<User, Guid>()
+            .Query()
+            .FirstOrDefaultAsync(
+                u => !u.IsDeleted && u.IsActive && u.Email.ToLower() == normalizedEmail,
+                cancellationToken);
+
+    public Task<User?> FindActiveByIdForUpdateAsync(
+        Guid userId,
+        CancellationToken cancellationToken = default) =>
+        _unitOfWork.Repository<User, Guid>()
+            .Query()
+            .FirstOrDefaultAsync(
+                u => u.Id == userId && !u.IsDeleted && u.IsActive,
+                cancellationToken);
+
+    public Task<bool> EmailExistsForOtherUserAsync(
+        string normalizedEmail,
+        Guid userId,
+        CancellationToken cancellationToken = default) =>
+        _unitOfWork.Repository<User, Guid>()
+            .QueryReadOnly()
+            .AnyAsync(
+                u => !u.IsDeleted && u.Email.ToLower() == normalizedEmail && u.Id != userId,
+                cancellationToken);
 }

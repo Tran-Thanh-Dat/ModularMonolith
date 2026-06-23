@@ -22,6 +22,12 @@ public static class AuthErrors
     public const string PermissionDenied = "Auth.PermissionDenied";
 }
 
+public static class AccountErrors
+{
+    public const string CurrentPasswordInvalid = "Account.CurrentPasswordInvalid";
+    public const string PasswordResetTokenInvalid = "Account.PasswordResetTokenInvalid";
+}
+
 public static class UserErrors
 {
     public const string NotFound = "User.NotFound";
@@ -113,4 +119,26 @@ public static class MonitoringErrors
     public const string DependencyUnavailable = "Monitoring.DependencyUnavailable";
     public const string Forbidden = "Monitoring.Forbidden";
     public const string InvalidConfiguration = "Monitoring.InvalidConfiguration";
+}
+
+public static class SettingErrors
+{
+    public const string NotFound = "Setting.NotFound";
+    public const string KeyAlreadyExists = "Setting.KeyAlreadyExists";
+    public const string InvalidKey = "Setting.InvalidKey";
+    public const string InvalidGroup = "Setting.InvalidGroup";
+    public const string InvalidDataType = "Setting.InvalidDataType";
+    public const string InvalidValue = "Setting.InvalidValue";
+    public const string NotEditable = "Setting.NotEditable";
+    public const string SystemSettingCannotBeDeleted = "Setting.SystemSettingCannotBeDeleted";
+    public const string SensitiveValueHidden = "Setting.SensitiveValueHidden";
+    public const string EncryptedValueNotReadable = "Setting.EncryptedValueNotReadable";
+}
+
+public static class AccessPolicyErrors
+{
+    public const string InvalidPasswordPolicy = "AccessPolicy.InvalidPasswordPolicy";
+    public const string InvalidLoginPolicy = "AccessPolicy.InvalidLoginPolicy";
+    public const string InvalidSessionPolicy = "AccessPolicy.InvalidSessionPolicy";
+    public const string InvalidMaintenancePolicy = "AccessPolicy.InvalidMaintenancePolicy";
 }

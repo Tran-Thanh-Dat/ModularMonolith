@@ -10,6 +10,7 @@
     <ProjectReference Include="..\..\..\BuildingBlocks\BuildingBlocks.Application\BuildingBlocks.Application.csproj" />
     <ProjectReference Include="..\..\AuditLogs\AuditLogs.Application\AuditLogs.Application.csproj" />
     <ProjectReference Include="..\..\AuditLogs\AuditLogs.Domain\AuditLogs.Domain.csproj" />
+    <ProjectReference Include="..\..\Settings\Settings.Application\Settings.Application.csproj" />
   </ItemGroup>
 
   <ItemGroup>

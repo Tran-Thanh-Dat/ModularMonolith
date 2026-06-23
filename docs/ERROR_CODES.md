@@ -52,6 +52,13 @@ Suffix heuristics: `.NotFound` → 404, `.AlreadyExists` → 409, `.Invalid` →
 | `Auth.RefreshTokenReuseDetected` | Logged internally on reuse; client receives `Auth.RefreshTokenInvalid` |
 | `Auth.PermissionDenied` | Missing permission |
 
+## Account errors
+
+| Code | Description |
+|------|-------------|
+| `Account.CurrentPasswordInvalid` | Change password — wrong current password |
+| `Account.PasswordResetTokenInvalid` | Reset token invalid, expired, or already used |
+
 ## Category errors
 
 `Category.NotFound`, `Category.CodeAlreadyExists`, `Category.AlreadyDeleted`, `Category.AlreadyActive`, `Category.AlreadyInactive`
@@ -75,6 +82,14 @@ Suffix heuristics: `.NotFound` → 404, `.AlreadyExists` → 409, `.Invalid` →
 **Cache:** `Cache.ProviderNotConfigured`, `Cache.SerializationFailed`, `Cache.ConnectionFailed`
 
 **Monitoring:** `Monitoring.HealthCheckFailed`, `Monitoring.DependencyUnavailable`, `Monitoring.Forbidden`
+
+## Setting errors
+
+`Setting.NotFound`, `Setting.KeyAlreadyExists`, `Setting.InvalidKey`, `Setting.InvalidGroup`, `Setting.InvalidDataType`, `Setting.InvalidValue`, `Setting.NotEditable`, `Setting.SystemSettingCannotBeDeleted`, `Setting.SensitiveValueHidden`, `Setting.EncryptedValueNotReadable`
+
+## Access policy errors
+
+`AccessPolicy.InvalidPasswordPolicy`, `AccessPolicy.InvalidLoginPolicy`, `AccessPolicy.InvalidSessionPolicy`, `AccessPolicy.InvalidMaintenancePolicy`
 
 ## Adding a new error code
 

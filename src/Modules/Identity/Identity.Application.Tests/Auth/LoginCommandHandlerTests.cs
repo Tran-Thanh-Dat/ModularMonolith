@@ -5,6 +5,8 @@ using BuildingBlocks.Testing.Fakes;
 using Identity.Application.Abstractions;
 using Identity.Application.Auth.Login;
 using Identity.Domain.Permissions;
+using Settings.Application.Abstractions;
+using Settings.Application.AccessPolicy;
 using Identity.Domain.Roles;
 using Identity.Domain.Users;
 using Microsoft.Extensions.Logging.Abstractions;
@@ -85,10 +87,43 @@ public sealed class LoginCommandHandlerTests
             new FakeRefreshTokenService(),
             new FixedDateTimeProvider(DateTimeOffset.UtcNow),
             new FakeRefreshTokenSettings(),
+            new FakeAccessPolicyService(),
             activityLog,
             cacheBuffer,
             Options.Create(new CacheOptions { UserPermissionsExpirationMinutes = 20 }),
             NullLogger<LoginCommandHandler>.Instance);
+    }
+
+    private sealed class FakeAccessPolicyService : IAccessPolicyService
+    {
+        public Task<PasswordPolicyResponse> GetPasswordPolicyAsync(CancellationToken cancellationToken = default) =>
+            Task.FromResult(new PasswordPolicyResponse());
+
+        public Task UpdatePasswordPolicyAsync(UpdatePasswordPolicyRequest request, CancellationToken cancellationToken = default) =>
+            Task.CompletedTask;
+
+        public Task<LoginPolicyResponse> GetLoginPolicyAsync(CancellationToken cancellationToken = default) =>
+            Task.FromResult(new LoginPolicyResponse());
+
+        public Task UpdateLoginPolicyAsync(UpdateLoginPolicyRequest request, CancellationToken cancellationToken = default) =>
+            Task.CompletedTask;
+
+        public Task<SessionPolicyResponse> GetSessionPolicyAsync(CancellationToken cancellationToken = default) =>
+            Task.FromResult(new SessionPolicyResponse
+            {
+                AccessTokenExpirationMinutes = 30,
+                RefreshTokenExpirationDays = 7,
+                RefreshTokenReuseDetectionEnabled = true
+            });
+
+        public Task UpdateSessionPolicyAsync(UpdateSessionPolicyRequest request, CancellationToken cancellationToken = default) =>
+            Task.CompletedTask;
+
+        public Task<MaintenancePolicyResponse> GetMaintenancePolicyAsync(CancellationToken cancellationToken = default) =>
+            Task.FromResult(new MaintenancePolicyResponse());
+
+        public Task UpdateMaintenancePolicyAsync(UpdateMaintenancePolicyRequest request, CancellationToken cancellationToken = default) =>
+            Task.CompletedTask;
     }
 
     private sealed class FakeIdentityUserRepository(User? user) : IIdentityUserRepository
@@ -102,6 +137,22 @@ public sealed class LoginCommandHandlerTests
             Guid userId,
             CancellationToken cancellationToken = default) =>
             Task.FromResult(user);
+
+        public Task<User?> FindActiveByEmailAsync(
+            string normalizedEmail,
+            CancellationToken cancellationToken = default) =>
+            Task.FromResult(user);
+
+        public Task<User?> FindActiveByIdForUpdateAsync(
+            Guid userId,
+            CancellationToken cancellationToken = default) =>
+            Task.FromResult(user);
+
+        public Task<bool> EmailExistsForOtherUserAsync(
+            string normalizedEmail,
+            Guid userId,
+            CancellationToken cancellationToken = default) =>
+            Task.FromResult(false);
     }
 
     private sealed class FakeRefreshTokenRepository : IIdentityRefreshTokenRepository

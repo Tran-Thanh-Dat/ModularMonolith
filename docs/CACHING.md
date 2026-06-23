@@ -26,6 +26,14 @@ Prefix: `v1:` — defined in `CacheKeys` (`BuildingBlocks.Application`).
 | `v1:email-templates:code:{code}` | Template render snapshot |
 | `v1:files:detail:{id}` | File metadata DTO |
 | `v1:notifications:unread-count:{userId}` | Unread count (TTL ~15 min) |
+| `v1:settings:key:{key}` | Resolved setting value (non-sensitive) |
+| `v1:settings:detail:{id}` | Setting detail DTO |
+| `v1:settings:group:{group}` | Settings in a group |
+| `v1:settings:list:{hash}` | Paged settings list |
+| `v1:access-policy:password` | Password policy DTO |
+| `v1:access-policy:login` | Login policy DTO |
+| `v1:access-policy:session` | Session policy DTO |
+| `v1:access-policy:maintenance` | Maintenance policy DTO |
 
 ## Invalidation
 
@@ -42,6 +50,7 @@ Mutations enqueue operations via `ICacheOperationBuffer`:
 - File metadata detail
 - Notification unread count
 - User permissions snapshot (set on login/refresh)
+- System settings (non-sensitive) and typed access policies
 
 ## What is NOT cached
 

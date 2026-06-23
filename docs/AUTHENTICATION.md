@@ -11,6 +11,8 @@ JWT Bearer authentication with refresh token rotation. Identity module owns auth
 | POST | `/api/v1/auth/logout` | Anonymous | Revoke refresh token |
 | GET | `/api/v1/auth/me` | Bearer | Current user profile, roles, permissions |
 
+Account self-service (profile, change/forgot/reset password): see [ACCOUNT.md](./ACCOUNT.md).
+
 ## Login
 
 ```bash

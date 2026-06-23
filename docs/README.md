@@ -14,6 +14,7 @@
 | Architecture & request flow | [ARCHITECTURE.md](./ARCHITECTURE.md) · [KIEN_TRUC.md](./KIEN_TRUC.md) (Tiếng Việt) |
 | API routes, responses, status codes | [API_CONVENTIONS.md](./API_CONVENTIONS.md) |
 | Login, JWT, refresh tokens | [AUTHENTICATION.md](./AUTHENTICATION.md) |
+| Account profile & password reset | [ACCOUNT.md](./ACCOUNT.md) |
 | Roles, permissions, `[HasPermission]` | [AUTHORIZATION.md](./AUTHORIZATION.md) |
 | Error code reference | [ERROR_CODES.md](./ERROR_CODES.md) |
 | Pagination & filtering | [PAGINATION.md](./PAGINATION.md) |
@@ -45,6 +46,8 @@
 | Email & notifications | [NOTIFICATIONS.md](./NOTIFICATIONS.md) |
 | Hangfire background jobs | [BACKGROUND_JOBS.md](./BACKGROUND_JOBS.md) |
 | Health & monitoring | [MONITORING.md](./MONITORING.md) |
+| System settings | [SETTINGS.md](./SETTINGS.md) |
+| Access / security policies | [ACCESS_POLICY.md](./ACCESS_POLICY.md) |
 
 ## Quick commands
 
@@ -74,6 +77,7 @@ src/
     BackgroundJobs/     Hangfire jobs
     AuditLogs/          Audit trail & activity logs
     Monitoring/         Health details, system info
+    Settings/           System settings & access policies
 ```
 
 ## Contribution workflow

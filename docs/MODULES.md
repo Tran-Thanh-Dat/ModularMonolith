@@ -12,6 +12,18 @@ Overview of implemented feature modules.
 | **Entities** | `User`, `Role`, `Permission`, `UserRefreshToken` |
 | **Notes** | Refresh rotation + reuse detection; inactive users blocked |
 
+## Account (self-service)
+
+| | |
+|-|-|
+| **Purpose** | Profile, change password, forgot/reset password |
+| **API** | `/api/v1/account/*` |
+| **Permissions** | Auth required for profile/change-password; forgot/reset are anonymous |
+| **Entities** | `User`, `PasswordResetToken` |
+| **Notes** | Revokes refresh tokens on password change/reset; anti-enumeration on forgot |
+
+See [ACCOUNT.md](./ACCOUNT.md).
+
 ## Users / Roles / Permissions
 
 | | |
@@ -98,6 +110,18 @@ See [BACKGROUND_JOBS.md](./BACKGROUND_JOBS.md).
 | **Notes** | Public probes at `/health/live`, `/health/ready` |
 
 See [MONITORING.md](./MONITORING.md).
+
+## Settings / Access Policy
+
+| | |
+|-|-|
+| **Purpose** | Dynamic system configuration and typed security policies |
+| **API** | `/api/v1/settings`, `/api/v1/access-policy` |
+| **Permissions** | `Setting.*`, `AccessPolicy.*`, `Maintenance.*` |
+| **Entities** | `SystemSetting` |
+| **Notes** | Cached reads; sensitive masking; maintenance middleware; Auth uses session/password policy |
+
+See [SETTINGS.md](./SETTINGS.md) and [ACCESS_POLICY.md](./ACCESS_POLICY.md).
 
 ## Cache (BuildingBlocks)
 

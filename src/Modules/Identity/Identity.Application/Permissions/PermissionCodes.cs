@@ -43,6 +43,17 @@ public static class PermissionCodes
     public const string BackgroundJobDashboard = "BackgroundJob.Dashboard";
     public const string MonitoringHealthView = "Monitoring.HealthView";
     public const string MonitoringSystemInfoView = "Monitoring.SystemInfoView";
+    public const string SettingView = "Setting.View";
+    public const string SettingCreate = "Setting.Create";
+    public const string SettingUpdate = "Setting.Update";
+    public const string SettingDelete = "Setting.Delete";
+    public const string SettingActivate = "Setting.Activate";
+    public const string SettingDeactivate = "Setting.Deactivate";
+    public const string SettingViewSensitive = "Setting.ViewSensitive";
+    public const string AccessPolicyView = "AccessPolicy.View";
+    public const string AccessPolicyUpdate = "AccessPolicy.Update";
+    public const string MaintenanceView = "Maintenance.View";
+    public const string MaintenanceUpdate = "Maintenance.Update";
 
     public static IReadOnlyCollection<string> All { get; } =
     [
@@ -86,6 +97,17 @@ public static class PermissionCodes
         BackgroundJobRun,
         BackgroundJobDashboard,
         MonitoringHealthView,
-        MonitoringSystemInfoView
+        MonitoringSystemInfoView,
+        SettingView,
+        SettingCreate,
+        SettingUpdate,
+        SettingDelete,
+        SettingActivate,
+        SettingDeactivate,
+        SettingViewSensitive,
+        AccessPolicyView,
+        AccessPolicyUpdate,
+        MaintenanceView,
+        MaintenanceUpdate
     ];
 }

@@ -58,6 +58,14 @@ Canonical registry: `src/Modules/Identity/Identity.Application/Permissions/Permi
 
 `Monitoring.HealthView`, `Monitoring.SystemInfoView`
 
+### Settings (`SettingsPermissionCodes`)
+
+`Setting.View`, `Setting.Create`, `Setting.Update`, `Setting.Delete`, `Setting.Activate`, `Setting.Deactivate`, `Setting.ViewSensitive`
+
+### Access policy / maintenance
+
+`AccessPolicy.View`, `AccessPolicy.Update`, `Maintenance.View`, `Maintenance.Update`
+
 ### Audit logs
 
 `AuditLog.View` (and legacy `AuditLogs.View`), `ActivityLog.View`

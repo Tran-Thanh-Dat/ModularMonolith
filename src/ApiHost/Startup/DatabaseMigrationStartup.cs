@@ -6,6 +6,8 @@ using Identity.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Notifications.Infrastructure.Persistence;
+using Settings.Application.Abstractions;
+using Settings.Infrastructure.Persistence;
 
 namespace ApiHost.Startup;
 
@@ -59,6 +61,20 @@ internal static class DatabaseMigrationStartup
                 await categoriesDbContext.Database.MigrateAsync();
             },
             "Categories migration failed. Run: dotnet ef database update --project src/Modules/Categories/Categories.Infrastructure --startup-project src/ApiHost --context CategoriesDbContext");
+
+        await RunStepAsync(
+            failOnError,
+            loggerFactory.CreateLogger("SettingsStartup"),
+            "Settings migration",
+            async () =>
+            {
+                var settingsDbContext = scope.ServiceProvider.GetRequiredService<SettingsDbContext>();
+                await settingsDbContext.Database.MigrateAsync();
+
+                var settingsSeeder = scope.ServiceProvider.GetRequiredService<ISettingsSeeder>();
+                await settingsSeeder.SeedAsync();
+            },
+            "Settings migration failed. Run: dotnet ef database update --project src/Modules/Settings/Settings.Infrastructure --startup-project src/ApiHost --context SettingsDbContext");
 
         await RunStepAsync(
             failOnError,

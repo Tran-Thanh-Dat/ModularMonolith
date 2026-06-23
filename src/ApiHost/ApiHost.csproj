@@ -23,6 +23,8 @@
     <ProjectReference Include="..\Modules\AuditLogs\AuditLogs.Infrastructure\AuditLogs.Infrastructure.csproj" />
     <ProjectReference Include="..\Modules\Categories\Categories.Api\Categories.Api.csproj" />
     <ProjectReference Include="..\Modules\Categories\Categories.Infrastructure\Categories.Infrastructure.csproj" />
+    <ProjectReference Include="..\Modules\Settings\Settings.Api\Settings.Api.csproj" />
+    <ProjectReference Include="..\Modules\Settings\Settings.Infrastructure\Settings.Infrastructure.csproj" />
     <ProjectReference Include="..\Modules\Files\Files.Api\Files.Api.csproj" />
     <ProjectReference Include="..\Modules\Files\Files.Infrastructure\Files.Infrastructure.csproj" />
     <ProjectReference Include="..\Modules\Notifications\Notifications.Api\Notifications.Api.csproj" />
