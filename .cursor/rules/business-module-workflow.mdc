@@ -1,0 +1,9 @@
+---
+description: Quy trình implement module mới — thứ tự 10 bước
+globs: src/Modules/**
+alwaysApply: false
+---
+
+# Business Module Workflow
+
+**Read and follow:** [ai/rules/business-module-workflow.md](../../ai/rules/business-module-workflow.md)

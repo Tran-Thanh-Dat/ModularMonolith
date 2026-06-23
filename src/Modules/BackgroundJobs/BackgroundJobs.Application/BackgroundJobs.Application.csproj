@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>BackgroundJobs.Application</RootNamespace>
+    <AssemblyName>BackgroundJobs.Application</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BackgroundJobs.Domain\BackgroundJobs.Domain.csproj" />
+    <ProjectReference Include="..\..\AuditLogs\AuditLogs.Application\AuditLogs.Application.csproj" />
+    <ProjectReference Include="..\..\..\BuildingBlocks\BuildingBlocks.Application\BuildingBlocks.Application.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="11.11.0" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.11.0" />
+    <PackageReference Include="MediatR" Version="12.4.1" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.2" />
+  </ItemGroup>
+
+</Project>

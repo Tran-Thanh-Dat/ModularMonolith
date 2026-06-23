@@ -1,0 +1,9 @@
+---
+description: Post-commit, cache, activity log, audit, security
+globs: src/Modules/**
+alwaysApply: false
+---
+
+# Cross-Cutting
+
+**Read and follow:** [ai/rules/module-cross-cutting.md](../../ai/rules/module-cross-cutting.md)

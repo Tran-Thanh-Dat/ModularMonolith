@@ -1,0 +1,45 @@
+# Git and IDE
+.git/
+.gitignore
+.vs/
+.idea/
+.vscode/
+*.user
+*.suo
+
+# Build output
+**/bin/
+**/obj/
+TestResults/
+coverage/
+*.trx
+
+# Local runtime data
+uploads/
+logs/
+**/uploads/
+**/logs/
+.local/
+
+# Tests (not needed for ApiHost publish)
+**/*Tests/
+**/*.Tests/
+**/ApiHost.IntegrationTests/
+
+# Docker / CI docs do not affect build
+docker-compose*.yml
+Dockerfile*
+.dockerignore
+.env
+.env.*
+!.env.example
+
+# Secrets and local overrides
+**/appsettings.Development.json
+**/appsettings.Development.local.json
+**/appsettings.*.local.json
+**/secrets.json
+
+# OS
+Thumbs.db
+.DS_Store

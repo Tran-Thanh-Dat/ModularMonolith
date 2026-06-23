@@ -1,0 +1,10 @@
+---
+description: Business module docs — khi nào áp dụng và nguồn tham chiếu
+alwaysApply: true
+---
+
+# Business Module
+
+**Read and follow:** [ai/rules/business-module-docs.md](../../ai/rules/business-module-docs.md)
+
+Nội dung rule nằm trong `ai/rules/` — không duplicate ở đây. Giải thích `.cursor` vs `ai`: [ai/CURSOR.md](../../ai/CURSOR.md).
