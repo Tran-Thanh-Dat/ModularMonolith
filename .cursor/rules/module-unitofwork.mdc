@@ -1,0 +1,9 @@
+---
+description: Typed UnitOfWork — EfUnitOfWork, TransactionBehavior
+globs: src/Modules/**/{*.Application,*.Infrastructure}/**
+alwaysApply: false
+---
+
+# Typed UnitOfWork
+
+**Read and follow:** [ai/rules/module-unitofwork.md](../../ai/rules/module-unitofwork.md)

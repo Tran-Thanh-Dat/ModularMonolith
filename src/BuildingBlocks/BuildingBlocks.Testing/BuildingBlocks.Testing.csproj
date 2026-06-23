@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>BuildingBlocks.Testing</RootNamespace>
+    <AssemblyName>BuildingBlocks.Testing</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BuildingBlocks.Application\BuildingBlocks.Application.csproj" />
+    <ProjectReference Include="..\..\Modules\AuditLogs\AuditLogs.Application\AuditLogs.Application.csproj" />
+  </ItemGroup>
+
+</Project>

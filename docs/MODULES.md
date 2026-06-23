@@ -1,0 +1,116 @@
+# Modules
+
+Overview of implemented feature modules.
+
+## Identity / Auth
+
+| | |
+|-|-|
+| **Purpose** | Login, JWT, refresh tokens, logout, current user |
+| **API** | `/api/v1/auth/*` |
+| **Permissions** | Public login/refresh; `/me` requires auth |
+| **Entities** | `User`, `Role`, `Permission`, `UserRefreshToken` |
+| **Notes** | Refresh rotation + reuse detection; inactive users blocked |
+
+## Users / Roles / Permissions
+
+| | |
+|-|-|
+| **Purpose** | User CRUD, activate/deactivate, role & permission assignment |
+| **API** | `/api/v1/users` |
+| **Permissions** | `Users.*` |
+| **Entities** | Uses Identity entities (`User`, `Role`, `Permission`) via `IdentityDbContext` |
+| **Notes** | No separate Users DbContext; permission cache invalidated on role changes |
+
+## Categories
+
+| | |
+|-|-|
+| **Purpose** | Reference data CRUD with soft activate/deactivate |
+| **API** | `/api/v1/categories` |
+| **Permissions** | `Category.*` |
+| **Entities** | `Category` |
+| **Notes** | List/detail cached; invalidation on mutations |
+
+## Files
+
+| | |
+|-|-|
+| **Purpose** | Upload, download, metadata, temporary vs permanent files |
+| **API** | `/api/v1/files` |
+| **Permissions** | `File.*` |
+| **Entities** | `FileResource` |
+| **Notes** | Local storage provider; magic-byte validation; cleanup job |
+
+See [FILES.md](./FILES.md).
+
+## Notifications / Email
+
+| | |
+|-|-|
+| **Purpose** | In-app notifications, SMTP email, templates |
+| **API** | `/api/v1/notifications`, `/api/v1/email-templates`, `/api/v1/email-messages` |
+| **Permissions** | `Notification.*`, `Email.*` |
+| **Entities** | `Notification`, `EmailMessage`, `EmailTemplate` |
+| **Notes** | TestMode redirect; cross-user needs ViewAll/Manage |
+
+See [NOTIFICATIONS.md](./NOTIFICATIONS.md).
+
+## Background Jobs
+
+| | |
+|-|-|
+| **Purpose** | Hangfire recurring jobs, manual triggers, execution history |
+| **API** | `/api/v1/background-jobs` |
+| **Permissions** | `BackgroundJob.View`, `.Run`, `.Dashboard` |
+| **Entities** | `BackgroundJobExecution` |
+| **Notes** | Email retry, temp file cleanup, optional log cleanup |
+
+See [BACKGROUND_JOBS.md](./BACKGROUND_JOBS.md).
+
+## Audit Logs
+
+| | |
+|-|-|
+| **Purpose** | Entity change audit trail (who changed what) |
+| **API** | `/api/audit-logs` |
+| **Permissions** | `AuditLog.View` / legacy `AuditLogs.View` |
+| **Entities** | `AuditLog` |
+| **Notes** | Populated by EF change-tracking interceptor |
+
+## Activity Logs
+
+| | |
+|-|-|
+| **Purpose** | Business/security events (login, CRUD, auth failures) |
+| **API** | `/api/activity-logs` |
+| **Permissions** | `ActivityLog.View` |
+| **Entities** | `ActivityLog` |
+| **Notes** | Post-commit flush for enqueued entries |
+
+## Monitoring
+
+| | |
+|-|-|
+| **Purpose** | Detailed health, system info |
+| **API** | `/api/v1/monitoring/*` |
+| **Permissions** | `Monitoring.HealthView`, `Monitoring.SystemInfoView` |
+| **Notes** | Public probes at `/health/live`, `/health/ready` |
+
+See [MONITORING.md](./MONITORING.md).
+
+## Cache (BuildingBlocks)
+
+| | |
+|-|-|
+| **Purpose** | Distributed/in-memory cache abstraction |
+| **API** | None (infrastructure) |
+| **Notes** | Memory or Redis; post-commit invalidation |
+
+See [CACHING.md](./CACHING.md).
+
+## BuildingBlocks
+
+Shared library — not a business module. Provides Result pattern, MediatR behaviors, `BaseApiController`, cache, health, middleware.
+
+See [ARCHITECTURE.md](./ARCHITECTURE.md).

@@ -1,0 +1,9 @@
+---
+description: API controllers — route, DTO, permission, ApiResponse
+globs: src/Modules/**/*.Api/**
+alwaysApply: false
+---
+
+# API Layer
+
+**Read and follow:** [ai/rules/module-api-layer.md](../../ai/rules/module-api-layer.md)

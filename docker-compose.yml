@@ -1,0 +1,133 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: modular-monolith-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-modular_monolith}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-dev_postgres_password_change_me}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-modular_monolith}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    networks:
+      - modular-monolith
+
+  redis:
+    image: redis:7-alpine
+    container_name: modular-monolith-redis
+    restart: unless-stopped
+    command: ["redis-server", "--appendonly", "yes"]
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - modular-monolith
+
+  mailpit:
+    image: axllent/mailpit:latest
+    container_name: modular-monolith-mailpit
+    restart: unless-stopped
+    ports:
+      - "${MAILPIT_SMTP_PORT:-1025}:1025"
+      - "${MAILPIT_UI_PORT:-8025}:8025"
+    networks:
+      - modular-monolith
+
+  pgadmin:
+    profiles: ["tools"]
+    image: dpage/pgadmin4:latest
+    container_name: modular-monolith-pgadmin
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL:-admin@example.com}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD:-dev_pgadmin_password_change_me}
+      PGADMIN_CONFIG_SERVER_MODE: "False"
+    ports:
+      - "${PGADMIN_PORT:-5050}:80"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - modular-monolith
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: modular-monolith-api
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      mailpit:
+        condition: service_started
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT:-Docker}
+      ASPNETCORE_URLS: http://+:8080
+      ConnectionStrings__DefaultConnection: Host=postgres;Port=5432;Database=${POSTGRES_DB:-modular_monolith};Username=${POSTGRES_USER:-postgres};Password=${POSTGRES_PASSWORD:-dev_postgres_password_change_me}
+      Cache__Provider: Redis
+      Cache__Redis__ConnectionString: redis:6379
+      Cache__Redis__InstanceName: ModularMonolith:
+      Cache__FailFastOnRedisUnavailableInProduction: "false"
+      Email__Provider: Smtp
+      Email__Smtp__Host: mailpit
+      Email__Smtp__Port: "1025"
+      Email__Smtp__EnableSsl: "false"
+      Email__TestMode__Enabled: "true"
+      Email__TestMode__RedirectTo: ${EMAIL_TEST_MODE_REDIRECT:-dev@example.com}
+      BackgroundJobs__Enabled: "true"
+      BackgroundJobs__Dashboard__Enabled: "true"
+      BackgroundJobs__Dashboard__BasicAuth__Enabled: "true"
+      BackgroundJobs__Dashboard__BasicAuth__UserName: ${HANGFIRE_DASHBOARD_USER:-hangfire}
+      BackgroundJobs__Dashboard__BasicAuth__Password: ${HANGFIRE_DASHBOARD_PASSWORD:-dev_hangfire_password_change_me}
+      HealthChecks__Enabled: "true"
+      Database__ApplyMigrationsOnStartup: "true"
+      Database__FailStartupOnMigrationError: "true"
+      Jwt__Secret: ${JWT_SECRET:-dev_jwt_secret_change_me_min_32_characters_long}
+      RefreshToken__Secret: ${REFRESH_TOKEN_SECRET:-dev_refresh_secret_change_me_min_32_chars}
+      AdminSeed__UserName: ${ADMIN_SEED_USER:-admin}
+      AdminSeed__Email: ${ADMIN_SEED_EMAIL:-admin@example.com}
+      AdminSeed__Password: ${ADMIN_SEED_PASSWORD:-Admin@123456}
+      FileStorage__Local__RootPath: uploads
+    ports:
+      - "${API_PORT:-5080}:8080"
+    volumes:
+      - api_uploads:/app/uploads
+      - api_logs:/app/logs
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health/live"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 90s
+    networks:
+      - modular-monolith
+
+networks:
+  modular-monolith:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  redis_data:
+  pgadmin_data:
+  api_uploads:
+  api_logs:

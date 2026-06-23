@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+
+
+  <PropertyGroup>
+
+    <RootNamespace>Notifications.Domain</RootNamespace>
+
+    <AssemblyName>Notifications.Domain</AssemblyName>
+
+  </PropertyGroup>
+
+
+
+  <ItemGroup>
+
+    <ProjectReference Include="..\..\..\BuildingBlocks\BuildingBlocks.Domain\BuildingBlocks.Domain.csproj" />
+
+  </ItemGroup>
+
+
+
+</Project>
+

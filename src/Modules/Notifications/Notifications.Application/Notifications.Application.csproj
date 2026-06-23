@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+
+
+  <PropertyGroup>
+
+    <RootNamespace>Notifications.Application</RootNamespace>
+
+    <AssemblyName>Notifications.Application</AssemblyName>
+
+  </PropertyGroup>
+
+
+
+  <ItemGroup>
+
+    <ProjectReference Include="..\Notifications.Domain\Notifications.Domain.csproj" />
+
+    <ProjectReference Include="..\..\..\BuildingBlocks\BuildingBlocks.Application\BuildingBlocks.Application.csproj" />
+
+  </ItemGroup>
+
+
+
+  <ItemGroup>
+
+    <PackageReference Include="FluentValidation" Version="11.11.0" />
+
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.11.0" />
+
+    <PackageReference Include="MediatR" Version="12.4.1" />
+
+    <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.2" />
+
+  </ItemGroup>
+
+
+
+</Project>
+

@@ -1,0 +1,50 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <RootNamespace>ApiHost</RootNamespace>
+    <AssemblyName>ApiHost</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="ApiHost.IntegrationTests\**" />
+    <Content Remove="ApiHost.IntegrationTests\**" />
+    <EmbeddedResource Remove="ApiHost.IntegrationTests\**" />
+    <None Remove="ApiHost.IntegrationTests\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BuildingBlocks\BuildingBlocks.Web\BuildingBlocks.Web.csproj" />
+    <ProjectReference Include="..\BuildingBlocks\BuildingBlocks.Infrastructure\BuildingBlocks.Infrastructure.csproj" />
+    <ProjectReference Include="..\Modules\Identity\Identity.Api\Identity.Api.csproj" />
+    <ProjectReference Include="..\Modules\Identity\Identity.Infrastructure\Identity.Infrastructure.csproj" />
+    <ProjectReference Include="..\Modules\Users\Users.Api\Users.Api.csproj" />
+    <ProjectReference Include="..\Modules\Users\Users.Infrastructure\Users.Infrastructure.csproj" />
+    <ProjectReference Include="..\Modules\AuditLogs\AuditLogs.Api\AuditLogs.Api.csproj" />
+    <ProjectReference Include="..\Modules\AuditLogs\AuditLogs.Infrastructure\AuditLogs.Infrastructure.csproj" />
+    <ProjectReference Include="..\Modules\Categories\Categories.Api\Categories.Api.csproj" />
+    <ProjectReference Include="..\Modules\Categories\Categories.Infrastructure\Categories.Infrastructure.csproj" />
+    <ProjectReference Include="..\Modules\Files\Files.Api\Files.Api.csproj" />
+    <ProjectReference Include="..\Modules\Files\Files.Infrastructure\Files.Infrastructure.csproj" />
+    <ProjectReference Include="..\Modules\Notifications\Notifications.Api\Notifications.Api.csproj" />
+    <ProjectReference Include="..\Modules\Notifications\Notifications.Infrastructure\Notifications.Infrastructure.csproj" />
+    <ProjectReference Include="..\Modules\BackgroundJobs\BackgroundJobs.Api\BackgroundJobs.Api.csproj" />
+    <ProjectReference Include="..\Modules\BackgroundJobs\BackgroundJobs.Infrastructure\BackgroundJobs.Infrastructure.csproj" />
+    <ProjectReference Include="..\Modules\Monitoring\Monitoring.Api\Monitoring.Api.csproj" />
+    <ProjectReference Include="..\Modules\Monitoring\Monitoring.Infrastructure\Monitoring.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.11" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.11" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.11">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Serilog.AspNetCore" Version="8.0.3" />
+    <PackageReference Include="Serilog.Settings.Configuration" Version="8.0.4" />
+    <PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+  </ItemGroup>
+
+</Project>

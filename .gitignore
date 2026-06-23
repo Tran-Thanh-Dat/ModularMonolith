@@ -1,0 +1,30 @@
+# Local tooling (PostgreSQL portable, etc.)
+.local/
+
+# Local uploads and build output
+/uploads/
+**/uploads/
+src/ApiHost/uploads/
+
+# Environment secrets (use .env.example as template)
+.env
+.env.local
+
+# Local developer overrides (never commit)
+**/appsettings.Development.local.json
+**/appsettings.*.local.json
+
+# .NET
+bin/
+obj/
+*.user
+*.suo
+.vs/
+
+# Logs
+logs/
+*.log
+
+# IDE
+.idea/
+.vscode/

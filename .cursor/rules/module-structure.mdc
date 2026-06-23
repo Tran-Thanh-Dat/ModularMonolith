@@ -1,0 +1,9 @@
+---
+description: Cấu trúc module — 4 project, dependency, Domain
+globs: src/Modules/**
+alwaysApply: false
+---
+
+# Module Structure
+
+**Read and follow:** [ai/rules/module-structure.md](../../ai/rules/module-structure.md)
