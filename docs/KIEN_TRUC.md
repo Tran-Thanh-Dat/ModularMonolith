@@ -106,6 +106,8 @@ HTTP Request
 
 **Query** bỏ qua bước `SaveChanges`, trừ khi cố ý có side-effect ghi dữ liệu.
 
+**Ví dụ cụ thể (Users GET vs POST):** [CQRS_REQUEST_FLOW.md](./CQRS_REQUEST_FLOW.md).
+
 ---
 
 ## Pipeline validation

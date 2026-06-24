@@ -6,6 +6,7 @@ Khi triển khai **business module mới**, đọc thêm:
 
 - [BUSINESS_MODULE_RULES.md](./BUSINESS_MODULE_RULES.md) — quy chuẩn bắt buộc
 - [BUSINESS_MODULE_WORKFLOW_GUIDE.md](./BUSINESS_MODULE_WORKFLOW_GUIDE.md) — quy trình từng bước
+- [CQRS_REQUEST_FLOW.md](./CQRS_REQUEST_FLOW.md) — luồng Controller → MediatR → Handler → Service (ví dụ Users)
 
 ## Checklist
 

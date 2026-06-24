@@ -11,7 +11,7 @@
 | **Setup sau khi clone (README root)** | [../README.md#setup-sau-khi-clone-source-net-sdk](../README.md#setup-sau-khi-clone-source-net-sdk) |
 | **Chạy migration (1 lệnh)** | [../README.md#chạy-migration](../README.md#chạy-migration) |
 | **Technical Architecture (TA) — cấu trúc source đầy đủ** | [TECHNICAL_ARCHITECTURE.md](./TECHNICAL_ARCHITECTURE.md) |
-| Architecture & request flow | [ARCHITECTURE.md](./ARCHITECTURE.md) · [KIEN_TRUC.md](./KIEN_TRUC.md) (Tiếng Việt) |
+| Architecture & request flow | [ARCHITECTURE.md](./ARCHITECTURE.md) · [KIEN_TRUC.md](./KIEN_TRUC.md) (Tiếng Việt) · **[CQRS_REQUEST_FLOW.md](./CQRS_REQUEST_FLOW.md)** (Users GET/POST) |
 | API routes, responses, status codes | [API_CONVENTIONS.md](./API_CONVENTIONS.md) |
 | **Danh sách API & module (living doc)** | **[API-DOCUMENT.md](./API-DOCUMENT.md)** |
 | Login, JWT, refresh tokens | [AUTHENTICATION.md](./AUTHENTICATION.md) |

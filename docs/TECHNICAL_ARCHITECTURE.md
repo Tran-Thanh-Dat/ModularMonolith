@@ -55,7 +55,7 @@
 | **Result pattern** | Handler trả `Result<T>`; controller map qua `BaseApiController` |
 | **Permission-based auth** | JWT + RBAC; policy động qua `[HasPermission]` |
 
-Chi tiết request flow: [KIEN_TRUC.md](./KIEN_TRUC.md) (Tiếng Việt) · [ARCHITECTURE.md](./ARCHITECTURE.md) (English).
+Chi tiết request flow: [KIEN_TRUC.md](./KIEN_TRUC.md) (Tiếng Việt) · [ARCHITECTURE.md](./ARCHITECTURE.md) (English) · **[CQRS_REQUEST_FLOW.md](./CQRS_REQUEST_FLOW.md)** (ví dụ Users GET/POST chi tiết).
 
 ### 1.2 Tech stack
 

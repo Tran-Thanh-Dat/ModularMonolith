@@ -96,6 +96,8 @@ HTTP Request
 
 Queries skip `SaveChanges` unless they intentionally use a command side-effect.
 
+**Detailed walkthrough (Users GET vs POST):** [CQRS_REQUEST_FLOW.md](./CQRS_REQUEST_FLOW.md).
+
 ## Validation pipeline
 
 - FluentValidation validators co-located with commands/queries

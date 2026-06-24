@@ -32,7 +32,7 @@ See [ACCOUNT.md](./ACCOUNT.md).
 | **API** | `/api/v1/users` |
 | **Permissions** | `Users.*` |
 | **Entities** | Uses Identity entities (`User`, `Role`, `Permission`) via `IdentityDbContext` |
-| **Notes** | No separate Users DbContext; permission cache invalidated on role changes |
+| **Notes** | No separate Users DbContext; permission cache invalidated on role changes. Request flow: [CQRS_REQUEST_FLOW.md](./CQRS_REQUEST_FLOW.md) |
 
 ## Categories
 
