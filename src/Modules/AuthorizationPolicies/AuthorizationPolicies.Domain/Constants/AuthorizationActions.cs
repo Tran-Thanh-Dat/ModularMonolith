@@ -12,4 +12,5 @@ public static class AuthorizationActions
     public const string Import = "Import";
     public const string Assign = "Assign";
     public const string Execute = "Execute";
+    public const string Cancel = "Cancel";
 }

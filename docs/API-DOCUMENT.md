@@ -46,7 +46,8 @@ Xem thêm: [ai/rules/feature-documentation.md](../ai/rules/feature-documentation
 | 15 | **Organizations** | Tenant, organization, workspace, membership | `/api/v1/tenants`, `/api/v1/organizations`, … |
 | 16 | **Authorization Policies** | Permission policy, matrix, scoped evaluation | `/api/v1/permission-policies`, `/api/v1/authorization-matrix`, `/api/v1/authorization-checks` |
 | 17 | **Master Data** | Lookup groups/items, batch lookups | `/api/v1/master-data-groups`, `/api/v1/master-data-items`, `/api/v1/lookups` |
-| 18 | **Diagnostics** | Test pipeline/exception (dev) | `/api/v1/diagnostics` |
+| 18 | **Async Tasks** | **Demo** message queue tasks (RabbitMQ; không thay Hangfire) | `/api/v1/async-tasks` |
+| 19 | **Diagnostics** | Test pipeline/exception (dev) | `/api/v1/diagnostics` |
 | — | **Health probes** | Liveness/readiness (không qua controller) | `/health/*` |
 | — | **Hangfire Dashboard** | UI quản lý job (Basic Auth) | `/hangfire` |
 
@@ -485,7 +486,26 @@ Query params chung: `scope`, `tenantId`, `organizationId`, `includeInactive`, `e
 
 ---
 
-## 18. Diagnostics (Dev/Test)
+## 18. Async Tasks (Message Queue Demo)
+
+**Module:** `AsyncTasks` · **Doc:** [ASYNC_TASKS.md](./ASYNC_TASKS.md)
+
+> Module học queue — **không thay Hangfire**. Cần `MessageQueue:Enabled=true` và RabbitMQ để submit/consume. App vẫn start khi `Enabled=false`.
+
+| Method | Route | Auth | Permission | Mô tả |
+|--------|-------|------|------------|-------|
+| POST | `/api/v1/async-tasks/email-demo` | Bearer | `AsyncTask.Submit` | Tạo demo task gửi email giả lập |
+| POST | `/api/v1/async-tasks/file-processing-demo` | Bearer | `AsyncTask.Submit` | Tạo demo task xử lý file giả lập |
+| POST | `/api/v1/async-tasks/fail-demo` | Bearer | `AsyncTask.Submit` | Tạo task cố ý fail (test retry) |
+| POST | `/api/v1/async-tasks/long-running-demo` | Bearer | `AsyncTask.Submit` | Demo task cập nhật progress |
+| GET | `/api/v1/async-tasks` | Bearer | `AsyncTask.View` | Danh sách task (filter, paging) |
+| GET | `/api/v1/async-tasks/{id}` | Bearer | `AsyncTask.View` | Chi tiết task |
+| POST | `/api/v1/async-tasks/{id}/cancel` | Bearer | `AsyncTask.Cancel` | Hủy task (PENDING/QUEUED/PROCESSING) |
+| POST | `/api/v1/async-tasks/{id}/retry` | Bearer | `AsyncTask.Retry` | Retry task FAILED |
+
+---
+
+## 19. Diagnostics (Dev/Test)
 
 **Module:** `ApiHost` · Chỉ dùng kiểm thử pipeline/exception handling.
 
@@ -503,7 +523,7 @@ Query params chung: `scope`, `tenantId`, `organizationId`, `includeInactive`, `e
 
 | Hạng mục | Số lượng |
 |----------|----------|
-| Business modules | 16 |
+| Business modules | 17 |
 | API controllers | 29 |
 | REST endpoints (ước tính) | ~170 |
 | Health / infra endpoints | 4 |

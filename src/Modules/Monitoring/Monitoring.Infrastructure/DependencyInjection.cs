@@ -10,6 +10,7 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
 using Monitoring.Application.Abstractions;
 using Monitoring.Infrastructure.HealthChecks;
+using AsyncTasks.Infrastructure.Health;
 using Monitoring.Infrastructure.Services;
 
 namespace Monitoring.Infrastructure;
@@ -136,6 +137,15 @@ public static class DependencyInjection
             tags: dependencyTags,
             timeout: TimeSpan.FromSeconds(Math.Max(1, healthOptions.TimeoutSeconds)));
         dependencyCheckCount++;
+
+        if (AsyncTasksHealthCheckExtensions.TryAddRabbitMqHealthCheck(
+                healthChecksBuilder,
+                configuration,
+                dependencyTags,
+                TimeSpan.FromSeconds(Math.Max(1, healthOptions.TimeoutSeconds))))
+        {
+            dependencyCheckCount++;
+        }
 
         services.AddSingleton(new HealthCheckRegistrationSummary
         {

@@ -159,6 +159,18 @@ See [AUTHORIZATION_POLICIES.md](./AUTHORIZATION_POLICIES.md).
 
 See [MASTER_DATA.md](./MASTER_DATA.md).
 
+## Async Tasks (Message Queue Demo)
+
+| | |
+|-|-|
+| **Purpose** | **Learning module** — RabbitMQ + MassTransit producer/consumer demo (does **not** replace Hangfire) |
+| **API** | `/api/v1/async-tasks` |
+| **Permissions** | `AsyncTask.View`, `AsyncTask.Submit`, `AsyncTask.Cancel`, `AsyncTask.Retry`, `AsyncTask.Manage` |
+| **Entities** | `AsyncTask` |
+| **Notes** | Schema `async_tasks`; optional via `MessageQueue:Enabled`; demo tasks with clear status only; app starts when queue disabled |
+
+See [ASYNC_TASKS.md](./ASYNC_TASKS.md).
+
 ## Cache (BuildingBlocks)
 
 | | |

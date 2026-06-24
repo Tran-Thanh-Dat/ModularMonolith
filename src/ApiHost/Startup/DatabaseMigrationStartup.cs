@@ -14,6 +14,7 @@ using AuthorizationPolicies.Application.Abstractions;
 using AuthorizationPolicies.Infrastructure.Persistence;
 using MasterData.Application.Abstractions;
 using MasterData.Infrastructure.Persistence;
+using AsyncTasks.Infrastructure.Persistence;
 
 namespace ApiHost.Startup;
 
@@ -123,6 +124,17 @@ internal static class DatabaseMigrationStartup
                 await masterDataSeeder.SeedAsync();
             },
             "MasterData migration failed. Run: dotnet ef database update --project src/Modules/MasterData/MasterData.Infrastructure --startup-project src/ApiHost --context MasterDataDbContext");
+
+        await RunStepAsync(
+            failOnError,
+            loggerFactory.CreateLogger("AsyncTasksStartup"),
+            "AsyncTasks migration",
+            async () =>
+            {
+                var asyncTasksDbContext = scope.ServiceProvider.GetRequiredService<AsyncTasksDbContext>();
+                await asyncTasksDbContext.Database.MigrateAsync();
+            },
+            "AsyncTasks migration failed. Run: dotnet ef database update --project src/Modules/AsyncTasks/AsyncTasks.Infrastructure --startup-project src/ApiHost --context AsyncTasksDbContext");
 
         await RunStepAsync(
             failOnError,
