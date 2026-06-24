@@ -123,6 +123,30 @@ See [MONITORING.md](./MONITORING.md).
 
 See [SETTINGS.md](./SETTINGS.md) and [ACCESS_POLICY.md](./ACCESS_POLICY.md).
 
+## Organizations
+
+| | |
+|-|-|
+| **Purpose** | Tenant, organization hierarchy, workspace, user membership |
+| **API** | `/api/v1/tenants`, `/api/v1/organizations`, `/api/v1/organization-users`, `/api/v1/workspaces`, `/api/v1/workspace-users` |
+| **Permissions** | `Tenant.View`, `Tenant.Manage`, `Organization.View`, `Organization.Manage`, `Workspace.View`, `Workspace.Manage` |
+| **Entities** | `Tenant`, `Organization`, `OrganizationUser`, `Workspace`, `WorkspaceUser` |
+| **Notes** | Schema `organizations`; no global tenant filter; user id validated via Identity repository |
+
+See [ORGANIZATIONS.md](./ORGANIZATIONS.md).
+
+## Authorization Policies
+
+| | |
+|-|-|
+| **Purpose** | Permission policy management, authorization matrix, scoped evaluation |
+| **API** | `/api/v1/permission-policies`, `/api/v1/authorization-matrix`, `/api/v1/authorization-checks` |
+| **Permissions** | `PermissionPolicy.*`, `AuthorizationMatrix.*`, `AuthorizationCheck.*` |
+| **Entities** | `PermissionPolicy`, `RolePermissionPolicy`, `UserPermissionPolicyOverride`, `AuthorizationMatrixEntry` |
+| **Notes** | Schema `authorization`; extends (does not replace) JWT `[HasPermission]`; uses Organizations membership for scope |
+
+See [AUTHORIZATION_POLICIES.md](./AUTHORIZATION_POLICIES.md).
+
 ## Cache (BuildingBlocks)
 
 | | |

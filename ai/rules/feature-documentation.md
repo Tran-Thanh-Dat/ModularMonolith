@@ -17,6 +17,7 @@ Hub: [../README.md](../README.md) · DoD: [../checklists/definition-of-done.md](
 
 | Thay đổi | Cập nhật |
 |----------|----------|
+| **API mới / sửa / xóa** | **`docs/API-DOCUMENT.md` (bắt buộc)** |
 | Module / API mới | `docs/{MODULE}.md` (tạo mới nếu chưa có) |
 | Endpoint / route | Module doc + `docs/MODULES.md` |
 | Auth / account | `docs/AUTHENTICATION.md`, `docs/ACCOUNT.md` (nếu liên quan) |

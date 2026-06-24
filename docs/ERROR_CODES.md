@@ -91,6 +91,61 @@ Suffix heuristics: `.NotFound` → 404, `.AlreadyExists` → 409, `.Invalid` →
 
 `AccessPolicy.InvalidPasswordPolicy`, `AccessPolicy.InvalidLoginPolicy`, `AccessPolicy.InvalidSessionPolicy`, `AccessPolicy.InvalidMaintenancePolicy`
 
+## Tenant errors
+
+`Tenant.NotFound`, `Tenant.InvalidCode`, `Tenant.InvalidName`, `Tenant.CodeAlreadyExists`, `Tenant.AlreadyDeleted`, `Tenant.AlreadyActive`, `Tenant.AlreadyInactive`, `Tenant.HasActiveDependencies`
+
+## Organization errors
+
+`Organization.NotFound`, `Organization.InvalidCode`, `Organization.InvalidName`, `Organization.InvalidTenant`, `Organization.InvalidSortOrder`, `Organization.CodeAlreadyExists`, `Organization.AlreadyDeleted`, `Organization.AlreadyActive`, `Organization.AlreadyInactive`, `Organization.ParentSelfReference`, `Organization.ParentNotFound`, `Organization.ParentDifferentTenant`, `Organization.ParentInactive`, `Organization.CircularParent`, `Organization.TenantInactive`, `Organization.HasActiveDependencies`, `Organization.Inactive`
+
+## Organization user errors
+
+`OrganizationUser.NotFound`, `OrganizationUser.InvalidUser`, `OrganizationUser.UserNotFound`, `OrganizationUser.AlreadyExists`, `OrganizationUser.AlreadyActive`, `OrganizationUser.AlreadyInactive`, `OrganizationUser.AlreadyRemoved`, `OrganizationUser.TenantInactive`, `OrganizationUser.OrganizationInactive`
+
+## Workspace errors
+
+`Workspace.NotFound`, `Workspace.InvalidCode`, `Workspace.InvalidName`, `Workspace.InvalidTenant`, `Workspace.CodeAlreadyExists`, `Workspace.AlreadyDeleted`, `Workspace.AlreadyActive`, `Workspace.AlreadyInactive`, `Workspace.TenantInactive`, `Workspace.OrganizationInactive`, `Workspace.OrganizationDifferentTenant`, `Workspace.OrganizationNotFound`, `Workspace.HasActiveDependencies`, `Workspace.Inactive`
+
+## Workspace user errors
+
+`WorkspaceUser.NotFound`, `WorkspaceUser.InvalidUser`, `WorkspaceUser.UserNotFound`, `WorkspaceUser.AlreadyExists`, `WorkspaceUser.AlreadyActive`, `WorkspaceUser.AlreadyInactive`, `WorkspaceUser.AlreadyRemoved`, `WorkspaceUser.TenantInactive`, `WorkspaceUser.WorkspaceInactive`, `WorkspaceUser.OrganizationMembershipRequired`
+
+## Authorization Policies errors
+
+Defined in `src/Modules/AuthorizationPolicies/AuthorizationPolicies.Domain/Errors/AuthorizationPolicyErrors.cs`.
+
+### Permission policy
+
+`PermissionPolicy.NotFound`, `PermissionPolicy.CodeAlreadyExists`, `PermissionPolicy.AlreadyDeleted`, `PermissionPolicy.AlreadyActive`, `PermissionPolicy.AlreadyInactive`, `PermissionPolicy.Inactive`, `PermissionPolicy.HasAssignments`
+
+### Role permission policy
+
+`RolePermissionPolicy.NotFound`, `RolePermissionPolicy.AlreadyExists`, `RolePermissionPolicy.AlreadyActive`, `RolePermissionPolicy.AlreadyInactive`, `RolePermissionPolicy.PolicyInactive`
+
+### User permission policy override
+
+`UserPermissionPolicyOverride.NotFound`, `UserPermissionPolicyOverride.AlreadyExists`, `UserPermissionPolicyOverride.AlreadyActive`, `UserPermissionPolicyOverride.AlreadyInactive`, `UserPermissionPolicyOverride.PolicyInactive`, `UserPermissionPolicyOverride.InvalidExpiresAt`
+
+### Authorization matrix
+
+`AuthorizationMatrix.NotFound`, `AuthorizationMatrix.AlreadyExists`, `AuthorizationMatrix.AlreadyDeleted`, `AuthorizationMatrix.AlreadyEnabled`, `AuthorizationMatrix.AlreadyDisabled`
+
+### Authorization check (evaluate / explain)
+
+| Code | HTTP | Description |
+|------|------|-------------|
+| `AuthorizationCheck.MissingPermissionOrAction` | 400 | Neither `permissionCode` nor `action`+`resourceType` provided |
+| `AuthorizationCheck.ScopeNotSupported` | 400 | Scope `Department` or `Custom` (not supported in Phase 24) |
+| `AuthorizationCheck.InvalidScope` | 400 | Unknown scope enum |
+| `AuthorizationCheck.MissingTenantId` | 400 | Tenant scope without `resourceContext.tenantId` |
+| `AuthorizationCheck.MissingOrganizationId` | 400 | Organization scope without `resourceContext.organizationId` |
+| `AuthorizationCheck.MissingWorkspaceId` | 400 | Workspace scope without `resourceContext.workspaceId` |
+| `AuthorizationCheck.MissingOwnerContext` | 400 | OwnerOnly without `ownerUserId` or `createdBy` |
+| `AuthorizationCheck.MissingAssignedUsers` | 400 | AssignedOnly with empty `assignedUserIds` |
+| `AuthorizationCheck.MissingSelfContext` | 400 | Self without `resourceId`, `ownerUserId`, or `createdBy` |
+| `AuthorizationCheck.UserNotFound` | 404 | Target user not found (evaluator) |
+
 ## Adding a new error code
 
 1. Add `public const string MyError = "MyModule.MyError";` to appropriate static class in `ErrorCodes.cs` (or module-specific file if split later)

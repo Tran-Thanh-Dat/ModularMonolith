@@ -13,12 +13,15 @@
 | **Technical Architecture (TA) — cấu trúc source đầy đủ** | [TECHNICAL_ARCHITECTURE.md](./TECHNICAL_ARCHITECTURE.md) |
 | Architecture & request flow | [ARCHITECTURE.md](./ARCHITECTURE.md) · [KIEN_TRUC.md](./KIEN_TRUC.md) (Tiếng Việt) |
 | API routes, responses, status codes | [API_CONVENTIONS.md](./API_CONVENTIONS.md) |
+| **Danh sách API & module (living doc)** | **[API-DOCUMENT.md](./API-DOCUMENT.md)** |
 | Login, JWT, refresh tokens | [AUTHENTICATION.md](./AUTHENTICATION.md) |
 | Account profile & password reset | [ACCOUNT.md](./ACCOUNT.md) |
 | Roles, permissions, `[HasPermission]` | [AUTHORIZATION.md](./AUTHORIZATION.md) |
 | Error code reference | [ERROR_CODES.md](./ERROR_CODES.md) |
 | Pagination & filtering | [PAGINATION.md](./PAGINATION.md) |
 | Module overview | [MODULES.md](./MODULES.md) |
+| **Organizations** (tenant, org, workspace model) | [ORGANIZATIONS.md](./ORGANIZATIONS.md) |
+| **Authorization Policies** (scoped policy, matrix, evaluator) | [AUTHORIZATION_POLICIES.md](./AUTHORIZATION_POLICIES.md) |
 | Create a new module | [MODULE_DEVELOPMENT_GUIDE.md](./MODULE_DEVELOPMENT_GUIDE.md) |
 | Business module rules (bắt buộc) | [BUSINESS_MODULE_RULES.md](./BUSINESS_MODULE_RULES.md) |
 | Business module workflow | [BUSINESS_MODULE_WORKFLOW_GUIDE.md](./BUSINESS_MODULE_WORKFLOW_GUIDE.md) |
@@ -48,6 +51,7 @@
 | Health & monitoring | [MONITORING.md](./MONITORING.md) |
 | System settings | [SETTINGS.md](./SETTINGS.md) |
 | Access / security policies | [ACCESS_POLICY.md](./ACCESS_POLICY.md) |
+| Authorization policies (scoped evaluator) | [AUTHORIZATION_POLICIES.md](./AUTHORIZATION_POLICIES.md) |
 
 ## Quick commands
 
@@ -78,6 +82,8 @@ src/
     AuditLogs/          Audit trail & activity logs
     Monitoring/         Health details, system info
     Settings/           System settings & access policies
+    Organizations/      Tenants, organizations, workspaces, membership
+    AuthorizationPolicies/  Permission policies, authorization matrix, scoped evaluator
 ```
 
 ## Contribution workflow

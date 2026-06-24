@@ -142,3 +142,81 @@ public static class AccessPolicyErrors
     public const string InvalidSessionPolicy = "AccessPolicy.InvalidSessionPolicy";
     public const string InvalidMaintenancePolicy = "AccessPolicy.InvalidMaintenancePolicy";
 }
+
+public static class TenantErrors
+{
+    public const string NotFound = "Tenant.NotFound";
+    public const string InvalidCode = "Tenant.InvalidCode";
+    public const string InvalidName = "Tenant.InvalidName";
+    public const string CodeAlreadyExists = "Tenant.CodeAlreadyExists";
+    public const string AlreadyDeleted = "Tenant.AlreadyDeleted";
+    public const string AlreadyActive = "Tenant.AlreadyActive";
+    public const string AlreadyInactive = "Tenant.AlreadyInactive";
+    public const string HasActiveDependencies = "Tenant.HasActiveDependencies";
+}
+
+public static class OrganizationErrors
+{
+    public const string NotFound = "Organization.NotFound";
+    public const string InvalidCode = "Organization.InvalidCode";
+    public const string InvalidName = "Organization.InvalidName";
+    public const string InvalidTenant = "Organization.InvalidTenant";
+    public const string InvalidSortOrder = "Organization.InvalidSortOrder";
+    public const string CodeAlreadyExists = "Organization.CodeAlreadyExists";
+    public const string AlreadyDeleted = "Organization.AlreadyDeleted";
+    public const string AlreadyActive = "Organization.AlreadyActive";
+    public const string AlreadyInactive = "Organization.AlreadyInactive";
+    public const string ParentSelfReference = "Organization.ParentSelfReference";
+    public const string ParentNotFound = "Organization.ParentNotFound";
+    public const string ParentDifferentTenant = "Organization.ParentDifferentTenant";
+    public const string ParentInactive = "Organization.ParentInactive";
+    public const string CircularParent = "Organization.CircularParent";
+    public const string TenantInactive = "Organization.TenantInactive";
+    public const string HasActiveDependencies = "Organization.HasActiveDependencies";
+    public const string Inactive = "Organization.Inactive";
+}
+
+public static class OrganizationUserErrors
+{
+    public const string NotFound = "OrganizationUser.NotFound";
+    public const string InvalidUser = "OrganizationUser.InvalidUser";
+    public const string UserNotFound = "OrganizationUser.UserNotFound";
+    public const string AlreadyExists = "OrganizationUser.AlreadyExists";
+    public const string AlreadyActive = "OrganizationUser.AlreadyActive";
+    public const string AlreadyInactive = "OrganizationUser.AlreadyInactive";
+    public const string AlreadyRemoved = "OrganizationUser.AlreadyRemoved";
+    public const string TenantInactive = "OrganizationUser.TenantInactive";
+    public const string OrganizationInactive = "OrganizationUser.OrganizationInactive";
+}
+
+public static class WorkspaceErrors
+{
+    public const string NotFound = "Workspace.NotFound";
+    public const string InvalidCode = "Workspace.InvalidCode";
+    public const string InvalidName = "Workspace.InvalidName";
+    public const string InvalidTenant = "Workspace.InvalidTenant";
+    public const string CodeAlreadyExists = "Workspace.CodeAlreadyExists";
+    public const string AlreadyDeleted = "Workspace.AlreadyDeleted";
+    public const string AlreadyActive = "Workspace.AlreadyActive";
+    public const string AlreadyInactive = "Workspace.AlreadyInactive";
+    public const string TenantInactive = "Workspace.TenantInactive";
+    public const string OrganizationInactive = "Workspace.OrganizationInactive";
+    public const string OrganizationDifferentTenant = "Workspace.OrganizationDifferentTenant";
+    public const string OrganizationNotFound = "Workspace.OrganizationNotFound";
+    public const string HasActiveDependencies = "Workspace.HasActiveDependencies";
+    public const string Inactive = "Workspace.Inactive";
+}
+
+public static class WorkspaceUserErrors
+{
+    public const string NotFound = "WorkspaceUser.NotFound";
+    public const string InvalidUser = "WorkspaceUser.InvalidUser";
+    public const string UserNotFound = "WorkspaceUser.UserNotFound";
+    public const string AlreadyExists = "WorkspaceUser.AlreadyExists";
+    public const string AlreadyActive = "WorkspaceUser.AlreadyActive";
+    public const string AlreadyInactive = "WorkspaceUser.AlreadyInactive";
+    public const string AlreadyRemoved = "WorkspaceUser.AlreadyRemoved";
+    public const string TenantInactive = "WorkspaceUser.TenantInactive";
+    public const string WorkspaceInactive = "WorkspaceUser.WorkspaceInactive";
+    public const string OrganizationMembershipRequired = "WorkspaceUser.OrganizationMembershipRequired";
+}

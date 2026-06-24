@@ -66,6 +66,14 @@ Canonical registry: `src/Modules/Identity/Identity.Application/Permissions/Permi
 
 `AccessPolicy.View`, `AccessPolicy.Update`, `Maintenance.View`, `Maintenance.Update`
 
+### Organizations (`OrganizationsPermissionCodes`)
+
+`Tenant.View`, `Tenant.Manage`, `Organization.View`, `Organization.Manage`, `Workspace.View`, `Workspace.Manage`
+
+### Authorization Policies (`AuthorizationPoliciesPermissionCodes`)
+
+`PermissionPolicy.View`, `PermissionPolicy.Manage`, `AuthorizationMatrix.View`, `AuthorizationMatrix.Manage`, `AuthorizationCheck.Execute`, `AuthorizationCheck.Explain`
+
 ### Audit logs
 
 `AuditLog.View` (and legacy `AuditLogs.View`), `ActivityLog.View`
@@ -84,6 +92,29 @@ public sealed class CategoriesController : BaseApiController
 ```
 
 Auth endpoints use `[AllowAnonymous]` (login/refresh) or `[Authorize]` only (`/me`).
+
+## Scoped authorization (Phase 24+)
+
+JWT `[HasPermission]` remains the **primary gate** for API endpoints. The **Authorization Policies** module adds a second layer for **resource-scoped** decisions:
+
+```
+User → Role → Permission → Policy → Scope → Resource
+```
+
+| Layer | Purpose |
+|-------|---------|
+| JWT permission | Endpoint access (`[HasPermission]`) |
+| Permission policy | Allow/Deny + scope rules per module/action/resource |
+| Authorization matrix | Maps action + resourceType → required permission + default scope |
+| Evaluator | `CheckAsync`, `AuthorizeAsync`, `ExplainAsync` on `IAuthorizationMatrixService` |
+
+**Important:**
+
+- `[HasPermission]` is **not replaced** — business modules call the evaluator when they need tenant/org/workspace/owner scope.
+- Organizations membership is used for Tenant / Organization / Workspace scopes.
+- User **Deny override** beats Allow; inactive policies and expired overrides are ignored.
+
+Full design: [AUTHORIZATION_POLICIES.md](./AUTHORIZATION_POLICIES.md).
 
 ## Cross-user access
 

@@ -14,6 +14,8 @@ public static class AuditLogConstants
         public const string Notifications = "Notifications";
         public const string BackgroundJobs = "BackgroundJobs";
         public const string Settings = "Settings";
+        public const string Organizations = "Organizations";
+        public const string AuthorizationPolicies = "AuthorizationPolicies";
     }
 
     public static class Actions

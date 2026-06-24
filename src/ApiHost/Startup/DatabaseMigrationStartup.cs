@@ -8,6 +8,10 @@ using Microsoft.Extensions.Logging;
 using Notifications.Infrastructure.Persistence;
 using Settings.Application.Abstractions;
 using Settings.Infrastructure.Persistence;
+using Organizations.Application.Abstractions;
+using Organizations.Infrastructure.Persistence;
+using AuthorizationPolicies.Application.Abstractions;
+using AuthorizationPolicies.Infrastructure.Persistence;
 
 namespace ApiHost.Startup;
 
@@ -75,6 +79,34 @@ internal static class DatabaseMigrationStartup
                 await settingsSeeder.SeedAsync();
             },
             "Settings migration failed. Run: dotnet ef database update --project src/Modules/Settings/Settings.Infrastructure --startup-project src/ApiHost --context SettingsDbContext");
+
+        await RunStepAsync(
+            failOnError,
+            loggerFactory.CreateLogger("OrganizationsStartup"),
+            "Organizations migration",
+            async () =>
+            {
+                var organizationsDbContext = scope.ServiceProvider.GetRequiredService<OrganizationsDbContext>();
+                await organizationsDbContext.Database.MigrateAsync();
+
+                var organizationsSeeder = scope.ServiceProvider.GetRequiredService<IOrganizationsSeeder>();
+                await organizationsSeeder.SeedAsync();
+            },
+            "Organizations migration failed. Run: dotnet ef database update --project src/Modules/Organizations/Organizations.Infrastructure --startup-project src/ApiHost --context OrganizationsDbContext");
+
+        await RunStepAsync(
+            failOnError,
+            loggerFactory.CreateLogger("AuthorizationPoliciesStartup"),
+            "AuthorizationPolicies migration",
+            async () =>
+            {
+                var authorizationPoliciesDbContext = scope.ServiceProvider.GetRequiredService<AuthorizationPoliciesDbContext>();
+                await authorizationPoliciesDbContext.Database.MigrateAsync();
+
+                var authorizationPoliciesSeeder = scope.ServiceProvider.GetRequiredService<IAuthorizationPoliciesSeeder>();
+                await authorizationPoliciesSeeder.SeedAsync();
+            },
+            "AuthorizationPolicies migration failed. Run: dotnet ef database update --project src/Modules/AuthorizationPolicies/AuthorizationPolicies.Infrastructure --startup-project src/ApiHost --context AuthorizationPoliciesDbContext");
 
         await RunStepAsync(
             failOnError,

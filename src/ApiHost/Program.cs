@@ -39,6 +39,10 @@ using Notifications.Infrastructure;
 using Settings.Api;
 
 using Settings.Infrastructure;
+using Organizations.Infrastructure;
+using Organizations.Api;
+using AuthorizationPolicies.Infrastructure;
+using AuthorizationPolicies.Api;
 
 using Microsoft.Extensions.Hosting;
 
@@ -125,6 +129,14 @@ try
 
     builder.Services.AddSettingsApi();
 
+    builder.Services.AddOrganizationsInfrastructure(builder.Configuration);
+
+    builder.Services.AddOrganizationsApi();
+
+    builder.Services.AddAuthorizationPoliciesInfrastructure(builder.Configuration);
+
+    builder.Services.AddAuthorizationPoliciesApi();
+
     builder.Services.AddFilesInfrastructure(builder.Configuration);
 
     builder.Services.AddFilesApi();
@@ -156,6 +168,10 @@ try
         .AddCategoriesPresentation()
 
         .AddSettingsPresentation()
+
+        .AddOrganizationsPresentation()
+
+        .AddAuthorizationPoliciesPresentation()
 
         .AddFilesPresentation()
 

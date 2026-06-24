@@ -10,6 +10,8 @@ using Identity.Application;
 using Monitoring.Application;
 using Notifications.Application;
 using Settings.Application;
+using Organizations.Application;
+using AuthorizationPolicies.Application;
 using Users.Application;
 
 namespace ApiHost.Extensions;
@@ -26,6 +28,8 @@ public static class ServiceCollectionExtensions
             typeof(AuditLogs.Application.DependencyInjection).Assembly,
             typeof(Categories.Application.DependencyInjection).Assembly,
             typeof(Settings.Application.DependencyInjection).Assembly,
+            typeof(Organizations.Application.DependencyInjection).Assembly,
+            typeof(AuthorizationPolicies.Application.DependencyInjection).Assembly,
             typeof(Files.Application.DependencyInjection).Assembly,
             typeof(Notifications.Application.DependencyInjection).Assembly,
             typeof(BackgroundJobs.Application.DependencyInjection).Assembly,

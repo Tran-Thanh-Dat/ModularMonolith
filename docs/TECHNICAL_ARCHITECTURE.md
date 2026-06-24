@@ -545,6 +545,39 @@ Chi tiết: [BACKGROUND_JOBS.md](./BACKGROUND_JOBS.md).
 
 Chi tiết: [MONITORING.md](./MONITORING.md).
 
+### 7.9 Organizations
+
+| | |
+|-|-|
+| **Path** | `src/Modules/Organizations/` |
+| **Mục đích** | Tenant, organization hierarchy, workspace, membership |
+| **API** | `/api/v1/tenants`, `/api/v1/organizations`, `/api/v1/workspaces`, … |
+| **Schema** | `organizations` |
+| **Entities** | `Tenant`, `Organization`, `OrganizationUser`, `Workspace`, `WorkspaceUser` |
+| **Notes** | No global tenant EF filter; user id validated via `IIdentityUserRepository` |
+
+Chi tiết: [ORGANIZATIONS.md](./ORGANIZATIONS.md).
+
+### 7.10 Authorization Policies
+
+| | |
+|-|-|
+| **Path** | `src/Modules/AuthorizationPolicies/` |
+| **Mục đích** | Permission policies, authorization matrix, scoped evaluator |
+| **API** | `/api/v1/permission-policies`, `/api/v1/authorization-matrix`, `/api/v1/authorization-checks` |
+| **Schema** | `authorization` |
+| **Entities** | `PermissionPolicy`, `RolePermissionPolicy`, `UserPermissionPolicyOverride`, `AuthorizationMatrixEntry` |
+| **Key services** | `AuthorizationMatrixService`, `CurrentUserPermissionContextService` |
+| **Permissions** | `PermissionPolicy.*`, `AuthorizationMatrix.*`, `AuthorizationCheck.*` |
+
+**Đặc biệt:**
+
+- Extends (does not replace) JWT `[HasPermission]`
+- `CheckAsync` / `AuthorizeAsync` / `ExplainAsync` share `EvaluateInternalAsync`
+- Membership from Organizations module for Tenant / Organization / Workspace scopes
+
+Chi tiết: [AUTHORIZATION_POLICIES.md](./AUTHORIZATION_POLICIES.md).
+
 ---
 
 ## 8. Database & schema map
@@ -561,6 +594,9 @@ Chi tiết: [MONITORING.md](./MONITORING.md).
 | `notifications` | `NotificationsDbContext` | Notifications | `Notifications.Infrastructure` |
 | `background_jobs` | `BackgroundJobsDbContext` | BackgroundJobs | `BackgroundJobs.Infrastructure` |
 | `audit` | `AuditLogsDbContext` | AuditLogs | `AuditLogs.Infrastructure` |
+| `settings` | `SettingsDbContext` | Settings | `Settings.Infrastructure` |
+| `organizations` | `OrganizationsDbContext` | Organizations | `Organizations.Infrastructure` |
+| `authorization` | `AuthorizationPoliciesDbContext` | AuthorizationPolicies | `AuthorizationPolicies.Infrastructure` |
 
 **Migration commands (mẫu):**
 

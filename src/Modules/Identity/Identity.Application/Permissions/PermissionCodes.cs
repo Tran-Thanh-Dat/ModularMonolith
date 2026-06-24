@@ -54,6 +54,18 @@ public static class PermissionCodes
     public const string AccessPolicyUpdate = "AccessPolicy.Update";
     public const string MaintenanceView = "Maintenance.View";
     public const string MaintenanceUpdate = "Maintenance.Update";
+    public const string TenantView = "Tenant.View";
+    public const string TenantManage = "Tenant.Manage";
+    public const string OrganizationView = "Organization.View";
+    public const string OrganizationManage = "Organization.Manage";
+    public const string WorkspaceView = "Workspace.View";
+    public const string WorkspaceManage = "Workspace.Manage";
+    public const string PermissionPolicyView = "PermissionPolicy.View";
+    public const string PermissionPolicyManage = "PermissionPolicy.Manage";
+    public const string AuthorizationMatrixView = "AuthorizationMatrix.View";
+    public const string AuthorizationMatrixManage = "AuthorizationMatrix.Manage";
+    public const string AuthorizationCheckExecute = "AuthorizationCheck.Execute";
+    public const string AuthorizationCheckExplain = "AuthorizationCheck.Explain";
 
     public static IReadOnlyCollection<string> All { get; } =
     [
@@ -108,6 +120,18 @@ public static class PermissionCodes
         AccessPolicyView,
         AccessPolicyUpdate,
         MaintenanceView,
-        MaintenanceUpdate
+        MaintenanceUpdate,
+        TenantView,
+        TenantManage,
+        OrganizationView,
+        OrganizationManage,
+        WorkspaceView,
+        WorkspaceManage,
+        PermissionPolicyView,
+        PermissionPolicyManage,
+        AuthorizationMatrixView,
+        AuthorizationMatrixManage,
+        AuthorizationCheckExecute,
+        AuthorizationCheckExplain
     ];
 }

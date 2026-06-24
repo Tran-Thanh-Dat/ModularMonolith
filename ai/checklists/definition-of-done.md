@@ -34,6 +34,7 @@ Dùng sau khi AI hoặc dev hoàn thành module/tính năng business.
 
 - [ ] Unit/service tests tối thiểu (create, not found, validation, duplicate nếu có code unique)
 - [ ] **Docs luôn đồng bộ code** — xem [../rules/feature-documentation.md](../rules/feature-documentation.md)
+- [ ] **`docs/API-DOCUMENT.md`** — cập nhật khi thêm/sửa/xóa API
 - [ ] `docs/{MODULE}.md` hoặc cập nhật module doc
 - [ ] `docs/MODULES.md`, `AUTHORIZATION.md`, `ERROR_CODES.md`, `docs/README.md` (link doc mới) nếu có thay đổi
 - [ ] Future/backlog ghi rõ — không claim đã implement

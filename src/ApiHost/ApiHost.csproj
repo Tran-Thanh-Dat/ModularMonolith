@@ -25,6 +25,10 @@
     <ProjectReference Include="..\Modules\Categories\Categories.Infrastructure\Categories.Infrastructure.csproj" />
     <ProjectReference Include="..\Modules\Settings\Settings.Api\Settings.Api.csproj" />
     <ProjectReference Include="..\Modules\Settings\Settings.Infrastructure\Settings.Infrastructure.csproj" />
+    <ProjectReference Include="..\Modules\Organizations\Organizations.Api\Organizations.Api.csproj" />
+    <ProjectReference Include="..\Modules\Organizations\Organizations.Infrastructure\Organizations.Infrastructure.csproj" />
+    <ProjectReference Include="..\Modules\AuthorizationPolicies\AuthorizationPolicies.Api\AuthorizationPolicies.Api.csproj" />
+    <ProjectReference Include="..\Modules\AuthorizationPolicies\AuthorizationPolicies.Infrastructure\AuthorizationPolicies.Infrastructure.csproj" />
     <ProjectReference Include="..\Modules\Files\Files.Api\Files.Api.csproj" />
     <ProjectReference Include="..\Modules\Files\Files.Infrastructure\Files.Infrastructure.csproj" />
     <ProjectReference Include="..\Modules\Notifications\Notifications.Api\Notifications.Api.csproj" />
