@@ -146,6 +146,22 @@ Defined in `src/Modules/AuthorizationPolicies/AuthorizationPolicies.Domain/Error
 | `AuthorizationCheck.MissingSelfContext` | 400 | Self without `resourceId`, `ownerUserId`, or `createdBy` |
 | `AuthorizationCheck.UserNotFound` | 404 | Target user not found (evaluator) |
 
+## Master Data errors
+
+Defined in `src/Modules/MasterData/MasterData.Domain/Errors/MasterDataErrors.cs`.
+
+### Master data group
+
+`MasterDataGroup.NotFound`, `MasterDataGroup.CodeAlreadyExists`, `MasterDataGroup.AlreadyDeleted`, `MasterDataGroup.AlreadyActive`, `MasterDataGroup.AlreadyInactive`, `MasterDataGroup.Inactive`, `MasterDataGroup.HasActiveItems`, `MasterDataGroup.SystemProtected`, `MasterDataGroup.CodeChangeNotAllowed`, `MasterDataGroup.InvalidScope`, `MasterDataGroup.InvalidTenant`, `MasterDataGroup.TenantInactive`, `MasterDataGroup.InvalidOrganization`, `MasterDataGroup.OrganizationInactive`, `MasterDataGroup.OrganizationTenantMismatch`
+
+### Master data item
+
+`MasterDataItem.NotFound`, `MasterDataItem.CodeAlreadyExists`, `MasterDataItem.AlreadyDeleted`, `MasterDataItem.AlreadyActive`, `MasterDataItem.AlreadyInactive`, `MasterDataItem.GroupInactive`, `MasterDataItem.SystemProtected`, `MasterDataItem.CodeChangeNotAllowed`, `MasterDataItem.InvalidParent`, `MasterDataItem.ParentSelfReference`, `MasterDataItem.CircularParent`, `MasterDataItem.InvalidEffectiveRange`, `MasterDataItem.InactiveCannotBeDefault`
+
+### Lookup
+
+`Lookup.GroupCodeRequired`, `Lookup.GroupCodesRequired`, `Lookup.TooManyGroupCodes`, `Lookup.GroupNotFound`
+
 ## Adding a new error code
 
 1. Add `public const string MyError = "MyModule.MyError";` to appropriate static class in `ErrorCodes.cs` (or module-specific file if split later)

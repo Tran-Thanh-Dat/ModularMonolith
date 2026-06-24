@@ -78,6 +78,20 @@ Canonical registry: `src/Modules/Identity/Identity.Application/Permissions/Permi
 
 `AuditLog.View` (and legacy `AuditLogs.View`), `ActivityLog.View`
 
+### Master Data (`MasterDataPermissionCodes`)
+
+`MasterDataGroup.View`, `MasterDataGroup.Manage`, `MasterDataItem.View`, `MasterDataItem.Manage`, `Lookup.View`
+
+**Matrix baseline (seeded):**
+
+| Resource | View | Manage | Scopes |
+|----------|------|--------|--------|
+| MasterDataGroup | `MasterDataGroup.View` | `MasterDataGroup.Manage` | Global |
+| MasterDataItem | `MasterDataItem.View` | `MasterDataItem.Manage` | Global |
+| Lookup | `Lookup.View` | — | Global, Tenant, Organization |
+
+Lookup endpoints use `[HasPermission(Lookup.View)]` for both active and `includeInactive=true` reads — no separate permission for inactive lookups.
+
 ## Usage in controllers
 
 ```csharp

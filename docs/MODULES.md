@@ -147,6 +147,18 @@ See [ORGANIZATIONS.md](./ORGANIZATIONS.md).
 
 See [AUTHORIZATION_POLICIES.md](./AUTHORIZATION_POLICIES.md).
 
+## Master Data
+
+| | |
+|-|-|
+| **Purpose** | Shared reference lookup groups/items (USER_STATUS, PRIORITY, …) |
+| **API** | `/api/v1/master-data-groups`, `/api/v1/master-data-items`, `/api/v1/lookups` |
+| **Permissions** | `MasterDataGroup.View`, `MasterDataGroup.Manage`, `MasterDataItem.View`, `MasterDataItem.Manage`, `Lookup.View` |
+| **Entities** | `MasterDataGroup`, `MasterDataItem` |
+| **Notes** | Schema `master_data`; scope Global/Tenant/Organization; cached lookups; idempotent system seed |
+
+See [MASTER_DATA.md](./MASTER_DATA.md).
+
 ## Cache (BuildingBlocks)
 
 | | |

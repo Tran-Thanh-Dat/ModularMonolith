@@ -66,6 +66,11 @@ public static class PermissionCodes
     public const string AuthorizationMatrixManage = "AuthorizationMatrix.Manage";
     public const string AuthorizationCheckExecute = "AuthorizationCheck.Execute";
     public const string AuthorizationCheckExplain = "AuthorizationCheck.Explain";
+    public const string MasterDataGroupView = "MasterDataGroup.View";
+    public const string MasterDataGroupManage = "MasterDataGroup.Manage";
+    public const string MasterDataItemView = "MasterDataItem.View";
+    public const string MasterDataItemManage = "MasterDataItem.Manage";
+    public const string LookupView = "Lookup.View";
 
     public static IReadOnlyCollection<string> All { get; } =
     [
@@ -132,6 +137,11 @@ public static class PermissionCodes
         AuthorizationMatrixView,
         AuthorizationMatrixManage,
         AuthorizationCheckExecute,
-        AuthorizationCheckExplain
+        AuthorizationCheckExplain,
+        MasterDataGroupView,
+        MasterDataGroupManage,
+        MasterDataItemView,
+        MasterDataItemManage,
+        LookupView
     ];
 }

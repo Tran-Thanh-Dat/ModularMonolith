@@ -43,6 +43,8 @@ using Organizations.Infrastructure;
 using Organizations.Api;
 using AuthorizationPolicies.Infrastructure;
 using AuthorizationPolicies.Api;
+using MasterData.Infrastructure;
+using MasterData.Api;
 
 using Microsoft.Extensions.Hosting;
 
@@ -137,6 +139,10 @@ try
 
     builder.Services.AddAuthorizationPoliciesApi();
 
+    builder.Services.AddMasterDataInfrastructure(builder.Configuration);
+
+    builder.Services.AddMasterDataApi();
+
     builder.Services.AddFilesInfrastructure(builder.Configuration);
 
     builder.Services.AddFilesApi();
@@ -172,6 +178,8 @@ try
         .AddOrganizationsPresentation()
 
         .AddAuthorizationPoliciesPresentation()
+
+        .AddMasterDataPresentation()
 
         .AddFilesPresentation()
 

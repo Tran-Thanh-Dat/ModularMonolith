@@ -16,6 +16,7 @@ public static class AuditLogConstants
         public const string Settings = "Settings";
         public const string Organizations = "Organizations";
         public const string AuthorizationPolicies = "AuthorizationPolicies";
+        public const string MasterData = "MasterData";
     }
 
     public static class Actions

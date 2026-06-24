@@ -41,7 +41,14 @@ public sealed class AuthorizationPoliciesSeeder : IAuthorizationPoliciesSeeder
             ("Organizations", AuthorizationResourceTypes.Organization, AuthorizationActions.View, AuthorizationScope.Organization, "Organization.View"),
             ("Organizations", AuthorizationResourceTypes.Organization, AuthorizationActions.Manage, AuthorizationScope.Organization, "Organization.Manage"),
             ("Organizations", AuthorizationResourceTypes.Workspace, AuthorizationActions.View, AuthorizationScope.Workspace, "Workspace.View"),
-            ("Organizations", AuthorizationResourceTypes.Workspace, AuthorizationActions.Manage, AuthorizationScope.Workspace, "Workspace.Manage")
+            ("Organizations", AuthorizationResourceTypes.Workspace, AuthorizationActions.Manage, AuthorizationScope.Workspace, "Workspace.Manage"),
+            ("MasterData", "MasterDataGroup", AuthorizationActions.View, AuthorizationScope.Global, "MasterDataGroup.View"),
+            ("MasterData", "MasterDataGroup", AuthorizationActions.Manage, AuthorizationScope.Global, "MasterDataGroup.Manage"),
+            ("MasterData", "MasterDataItem", AuthorizationActions.View, AuthorizationScope.Global, "MasterDataItem.View"),
+            ("MasterData", "MasterDataItem", AuthorizationActions.Manage, AuthorizationScope.Global, "MasterDataItem.Manage"),
+            ("MasterData", "Lookup", AuthorizationActions.View, AuthorizationScope.Global, "Lookup.View"),
+            ("MasterData", "Lookup", AuthorizationActions.View, AuthorizationScope.Tenant, "Lookup.View"),
+            ("MasterData", "Lookup", AuthorizationActions.View, AuthorizationScope.Organization, "Lookup.View")
         };
 
         foreach (var (module, resource, action, scope, permission) in entries)

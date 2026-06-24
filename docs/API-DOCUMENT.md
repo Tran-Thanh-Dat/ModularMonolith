@@ -45,7 +45,8 @@ Xem thêm: [ai/rules/feature-documentation.md](../ai/rules/feature-documentation
 | 14 | **Access Policy** | Chính sách password/login/session/maintenance | `/api/v1/access-policy` |
 | 15 | **Organizations** | Tenant, organization, workspace, membership | `/api/v1/tenants`, `/api/v1/organizations`, … |
 | 16 | **Authorization Policies** | Permission policy, matrix, scoped evaluation | `/api/v1/permission-policies`, `/api/v1/authorization-matrix`, `/api/v1/authorization-checks` |
-| 17 | **Diagnostics** | Test pipeline/exception (dev) | `/api/v1/diagnostics` |
+| 17 | **Master Data** | Lookup groups/items, batch lookups | `/api/v1/master-data-groups`, `/api/v1/master-data-items`, `/api/v1/lookups` |
+| 18 | **Diagnostics** | Test pipeline/exception (dev) | `/api/v1/diagnostics` |
 | — | **Health probes** | Liveness/readiness (không qua controller) | `/health/*` |
 | — | **Hangfire Dashboard** | UI quản lý job (Basic Auth) | `/hangfire` |
 
@@ -441,7 +442,50 @@ Scope thiếu context → `400` với code `AuthorizationCheck.Missing*` (xem [E
 
 ---
 
-## 17. Diagnostics (Dev/Test)
+## 17. Master Data
+
+**Module:** `MasterData` · **Doc:** [MASTER_DATA.md](./MASTER_DATA.md)
+
+### Master data groups
+
+| Method | Route | Auth | Permission | Mô tả |
+|--------|-------|------|------------|-------|
+| GET | `/api/v1/master-data-groups` | Bearer | `MasterDataGroup.View` | Danh sách group (filter, paging) |
+| GET | `/api/v1/master-data-groups/{id}` | Bearer | `MasterDataGroup.View` | Chi tiết group |
+| POST | `/api/v1/master-data-groups` | Bearer | `MasterDataGroup.Manage` | Tạo group |
+| PUT | `/api/v1/master-data-groups/{id}` | Bearer | `MasterDataGroup.Manage` | Cập nhật group |
+| DELETE | `/api/v1/master-data-groups/{id}` | Bearer | `MasterDataGroup.Manage` | Xóa mềm group |
+| PATCH | `/api/v1/master-data-groups/{id}/activate` | Bearer | `MasterDataGroup.Manage` | Kích hoạt group |
+| PATCH | `/api/v1/master-data-groups/{id}/deactivate` | Bearer | `MasterDataGroup.Manage` | Vô hiệu hóa group |
+
+### Master data items
+
+| Method | Route | Auth | Permission | Mô tả |
+|--------|-------|------|------------|-------|
+| GET | `/api/v1/master-data-items` | Bearer | `MasterDataItem.View` | Danh sách item (filter, paging) |
+| GET | `/api/v1/master-data-items/{id}` | Bearer | `MasterDataItem.View` | Chi tiết item |
+| POST | `/api/v1/master-data-items` | Bearer | `MasterDataItem.Manage` | Tạo item |
+| PUT | `/api/v1/master-data-items/{id}` | Bearer | `MasterDataItem.Manage` | Cập nhật item |
+| DELETE | `/api/v1/master-data-items/{id}` | Bearer | `MasterDataItem.Manage` | Xóa mềm item |
+| PATCH | `/api/v1/master-data-items/{id}/activate` | Bearer | `MasterDataItem.Manage` | Kích hoạt item |
+| PATCH | `/api/v1/master-data-items/{id}/deactivate` | Bearer | `MasterDataItem.Manage` | Vô hiệu hóa item |
+| PATCH | `/api/v1/master-data-items/{id}/set-default` | Bearer | `MasterDataItem.Manage` | Đặt item mặc định trong group |
+
+### Lookups (read-only)
+
+| Method | Route | Auth | Permission | Mô tả |
+|--------|-------|------|------------|-------|
+| GET | `/api/v1/lookups/{groupCode}` | Bearer | `Lookup.View` | Lookup theo group code |
+| GET | `/api/v1/lookups?groupCodes=A,B` | Bearer | `Lookup.View` | Nhiều group (query `groupCodes`, max **50**) |
+| POST | `/api/v1/lookups/batch` | Bearer | `Lookup.View` | Batch lookup (body `groupCodes[]`, max **50**) |
+
+Query params chung: `scope`, `tenantId`, `organizationId`, `includeInactive`, `effectiveAt`, `includeMetadata`.
+
+**Lookup behavior:** Không fallback Global khi scope Tenant/Organization không có data. `includeInactive` dùng cùng permission `Lookup.View`. Scope Tenant/Organization yêu cầu tenant/org active khi mutate group.
+
+---
+
+## 18. Diagnostics (Dev/Test)
 
 **Module:** `ApiHost` · Chỉ dùng kiểm thử pipeline/exception handling.
 

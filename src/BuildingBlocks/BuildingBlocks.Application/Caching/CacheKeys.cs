@@ -46,6 +46,49 @@ public static class CacheKeys
     public static string SettingListPrefix =>
         BuildPrefix("settings", "list");
 
+    public static string MasterDataLookupGroup(
+        string scope,
+        Guid? tenantId,
+        Guid? organizationId,
+        string groupCode,
+        bool includeInactive,
+        bool includeMetadata,
+        string effectiveDateKey) =>
+        Build(
+            "master-data",
+            "lookup",
+            "group",
+            scope,
+            tenantId?.ToString("D") ?? "none",
+            organizationId?.ToString("D") ?? "none",
+            NormalizeSegment(groupCode),
+            includeInactive ? "all" : "active",
+            includeMetadata ? "meta" : "nometa",
+            effectiveDateKey);
+
+    public static string MasterDataLookupBatch(
+        string scope,
+        Guid? tenantId,
+        Guid? organizationId,
+        IReadOnlyList<string> groupCodes,
+        bool includeInactive,
+        bool includeMetadata,
+        string effectiveDateKey) =>
+        Build(
+            "master-data",
+            "lookup",
+            "batch",
+            scope,
+            tenantId?.ToString("D") ?? "none",
+            organizationId?.ToString("D") ?? "none",
+            HashQueryParameters(groupCodes.OrderBy(c => c, StringComparer.OrdinalIgnoreCase)),
+            includeInactive ? "all" : "active",
+            includeMetadata ? "meta" : "nometa",
+            effectiveDateKey);
+
+    public static string MasterDataLookupPrefix =>
+        BuildPrefix("master-data", "lookup");
+
     public static string AccessPolicyPassword =>
         Build("access-policy", "password");
 

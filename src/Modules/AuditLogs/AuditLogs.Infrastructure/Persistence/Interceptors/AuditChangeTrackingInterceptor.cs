@@ -328,6 +328,11 @@ public sealed class AuditChangeTrackingInterceptor : SaveChangesInterceptor
             return AuditLogConstants.Modules.Organizations;
         }
 
+        if (namespaceName.Contains("MasterData", StringComparison.OrdinalIgnoreCase))
+        {
+            return AuditLogConstants.Modules.MasterData;
+        }
+
         return namespaceName.Split('.').ElementAtOrDefault(1) ?? "System";
     }
 }

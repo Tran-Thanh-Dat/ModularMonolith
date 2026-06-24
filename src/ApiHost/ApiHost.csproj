@@ -29,6 +29,8 @@
     <ProjectReference Include="..\Modules\Organizations\Organizations.Infrastructure\Organizations.Infrastructure.csproj" />
     <ProjectReference Include="..\Modules\AuthorizationPolicies\AuthorizationPolicies.Api\AuthorizationPolicies.Api.csproj" />
     <ProjectReference Include="..\Modules\AuthorizationPolicies\AuthorizationPolicies.Infrastructure\AuthorizationPolicies.Infrastructure.csproj" />
+    <ProjectReference Include="..\Modules\MasterData\MasterData.Api\MasterData.Api.csproj" />
+    <ProjectReference Include="..\Modules\MasterData\MasterData.Infrastructure\MasterData.Infrastructure.csproj" />
     <ProjectReference Include="..\Modules\Files\Files.Api\Files.Api.csproj" />
     <ProjectReference Include="..\Modules\Files\Files.Infrastructure\Files.Infrastructure.csproj" />
     <ProjectReference Include="..\Modules\Notifications\Notifications.Api\Notifications.Api.csproj" />
