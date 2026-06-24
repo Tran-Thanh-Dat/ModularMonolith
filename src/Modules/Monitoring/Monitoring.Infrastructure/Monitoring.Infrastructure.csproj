@@ -23,6 +23,7 @@
     <ProjectReference Include="..\..\Notifications\Notifications.Application\Notifications.Application.csproj" />
 
     <ProjectReference Include="..\..\..\BuildingBlocks\BuildingBlocks.Infrastructure\BuildingBlocks.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\AsyncTasks\AsyncTasks.Infrastructure\AsyncTasks.Infrastructure.csproj" />
 
   </ItemGroup>
 

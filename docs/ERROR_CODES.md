@@ -162,6 +162,12 @@ Defined in `src/Modules/MasterData/MasterData.Domain/Errors/MasterDataErrors.cs`
 
 `Lookup.GroupCodeRequired`, `Lookup.GroupCodesRequired`, `Lookup.TooManyGroupCodes`, `Lookup.GroupNotFound`
 
+## Async Tasks errors
+
+Defined in `src/Modules/AsyncTasks/AsyncTasks.Domain/Errors/AsyncTaskErrors.cs`.
+
+`AsyncTask.NotFound`, `AsyncTask.TaskNoAlreadyExists`, `AsyncTask.InvalidStatus`, `AsyncTask.InvalidType`, `AsyncTask.InvalidProgress`, `AsyncTask.CannotCancel`, `AsyncTask.CannotRetry`, `AsyncTask.MaxRetryExceeded`, `AsyncTask.MessageQueueDisabled`, `AsyncTask.PublishFailed`, `AsyncTask.ProcessorNotFound`, `AsyncTask.ProcessingFailed`, `AsyncTask.PayloadTooLarge`
+
 ## Adding a new error code
 
 1. Add `public const string MyError = "MyModule.MyError";` to appropriate static class in `ErrorCodes.cs` (or module-specific file if split later)

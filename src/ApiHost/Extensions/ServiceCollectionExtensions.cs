@@ -13,6 +13,7 @@ using Settings.Application;
 using Organizations.Application;
 using AuthorizationPolicies.Application;
 using MasterData.Application;
+using AsyncTasks.Application;
 using Users.Application;
 
 namespace ApiHost.Extensions;
@@ -32,6 +33,7 @@ public static class ServiceCollectionExtensions
             typeof(Organizations.Application.DependencyInjection).Assembly,
             typeof(AuthorizationPolicies.Application.DependencyInjection).Assembly,
             typeof(MasterData.Application.DependencyInjection).Assembly,
+            typeof(AsyncTasks.Application.DependencyInjection).Assembly,
             typeof(Files.Application.DependencyInjection).Assembly,
             typeof(Notifications.Application.DependencyInjection).Assembly,
             typeof(BackgroundJobs.Application.DependencyInjection).Assembly,

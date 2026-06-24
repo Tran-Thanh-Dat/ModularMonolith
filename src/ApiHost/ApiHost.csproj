@@ -31,6 +31,8 @@
     <ProjectReference Include="..\Modules\AuthorizationPolicies\AuthorizationPolicies.Infrastructure\AuthorizationPolicies.Infrastructure.csproj" />
     <ProjectReference Include="..\Modules\MasterData\MasterData.Api\MasterData.Api.csproj" />
     <ProjectReference Include="..\Modules\MasterData\MasterData.Infrastructure\MasterData.Infrastructure.csproj" />
+    <ProjectReference Include="..\Modules\AsyncTasks\AsyncTasks.Api\AsyncTasks.Api.csproj" />
+    <ProjectReference Include="..\Modules\AsyncTasks\AsyncTasks.Infrastructure\AsyncTasks.Infrastructure.csproj" />
     <ProjectReference Include="..\Modules\Files\Files.Api\Files.Api.csproj" />
     <ProjectReference Include="..\Modules\Files\Files.Infrastructure\Files.Infrastructure.csproj" />
     <ProjectReference Include="..\Modules\Notifications\Notifications.Api\Notifications.Api.csproj" />

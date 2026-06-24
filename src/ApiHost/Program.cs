@@ -45,6 +45,8 @@ using AuthorizationPolicies.Infrastructure;
 using AuthorizationPolicies.Api;
 using MasterData.Infrastructure;
 using MasterData.Api;
+using AsyncTasks.Infrastructure;
+using AsyncTasks.Api;
 
 using Microsoft.Extensions.Hosting;
 
@@ -143,6 +145,10 @@ try
 
     builder.Services.AddMasterDataApi();
 
+    builder.Services.AddAsyncTasksInfrastructure(builder.Configuration);
+
+    builder.Services.AddAsyncTasksApi();
+
     builder.Services.AddFilesInfrastructure(builder.Configuration);
 
     builder.Services.AddFilesApi();
@@ -180,6 +186,8 @@ try
         .AddAuthorizationPoliciesPresentation()
 
         .AddMasterDataPresentation()
+
+        .AddAsyncTasksPresentation()
 
         .AddFilesPresentation()
 

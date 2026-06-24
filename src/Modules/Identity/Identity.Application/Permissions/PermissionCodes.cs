@@ -71,6 +71,11 @@ public static class PermissionCodes
     public const string MasterDataItemView = "MasterDataItem.View";
     public const string MasterDataItemManage = "MasterDataItem.Manage";
     public const string LookupView = "Lookup.View";
+    public const string AsyncTaskView = "AsyncTask.View";
+    public const string AsyncTaskSubmit = "AsyncTask.Submit";
+    public const string AsyncTaskCancel = "AsyncTask.Cancel";
+    public const string AsyncTaskRetry = "AsyncTask.Retry";
+    public const string AsyncTaskManage = "AsyncTask.Manage";
 
     public static IReadOnlyCollection<string> All { get; } =
     [
@@ -142,6 +147,11 @@ public static class PermissionCodes
         MasterDataGroupManage,
         MasterDataItemView,
         MasterDataItemManage,
-        LookupView
+        LookupView,
+        AsyncTaskView,
+        AsyncTaskSubmit,
+        AsyncTaskCancel,
+        AsyncTaskRetry,
+        AsyncTaskManage
     ];
 }

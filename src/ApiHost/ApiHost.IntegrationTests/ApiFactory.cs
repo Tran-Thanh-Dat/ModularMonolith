@@ -19,7 +19,8 @@ public sealed class ApiFactory : WebApplicationFactory<Program>
             {
                 ["BackgroundJobs:Enabled"] = "false",
                 ["HealthChecks:Enabled"] = "true",
-                ["Cache:Provider"] = "Memory"
+                ["Cache:Provider"] = "Memory",
+                ["MessageQueue:Enabled"] = "false"
             });
         });
 

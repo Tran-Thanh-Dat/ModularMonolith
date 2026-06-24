@@ -333,6 +333,11 @@ public sealed class AuditChangeTrackingInterceptor : SaveChangesInterceptor
             return AuditLogConstants.Modules.MasterData;
         }
 
+        if (namespaceName.Contains("AsyncTasks", StringComparison.OrdinalIgnoreCase))
+        {
+            return AuditLogConstants.Modules.AsyncTasks;
+        }
+
         return namespaceName.Split('.').ElementAtOrDefault(1) ?? "System";
     }
 }

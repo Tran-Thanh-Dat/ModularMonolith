@@ -48,7 +48,12 @@ public sealed class AuthorizationPoliciesSeeder : IAuthorizationPoliciesSeeder
             ("MasterData", "MasterDataItem", AuthorizationActions.Manage, AuthorizationScope.Global, "MasterDataItem.Manage"),
             ("MasterData", "Lookup", AuthorizationActions.View, AuthorizationScope.Global, "Lookup.View"),
             ("MasterData", "Lookup", AuthorizationActions.View, AuthorizationScope.Tenant, "Lookup.View"),
-            ("MasterData", "Lookup", AuthorizationActions.View, AuthorizationScope.Organization, "Lookup.View")
+            ("MasterData", "Lookup", AuthorizationActions.View, AuthorizationScope.Organization, "Lookup.View"),
+            ("AsyncTasks", "AsyncTask", AuthorizationActions.View, AuthorizationScope.OwnerOnly, "AsyncTask.View"),
+            ("AsyncTasks", "AsyncTask", AuthorizationActions.Create, AuthorizationScope.Tenant, "AsyncTask.Submit"),
+            ("AsyncTasks", "AsyncTask", AuthorizationActions.Cancel, AuthorizationScope.OwnerOnly, "AsyncTask.Cancel"),
+            ("AsyncTasks", "AsyncTask", AuthorizationActions.Execute, AuthorizationScope.OwnerOnly, "AsyncTask.Retry"),
+            ("AsyncTasks", "AsyncTask", AuthorizationActions.Manage, AuthorizationScope.Global, "AsyncTask.Manage")
         };
 
         foreach (var (module, resource, action, scope, permission) in entries)
